@@ -20,11 +20,9 @@ public class HeroHealth : MonoBehaviour
      private void Start()
      {
          // Set living cost timer
-         float tLivingDuration = 1f/(float)livingCostPerSecond;
          tLivingCost.setDuration(1f);
 
          // Set Oxygen cost timer info
-         float tOxygenDuration = 1f/(float)oxygenCostPerSecond;
          tOxygenCost.setDuration(1f);
          
          // Set slider values
