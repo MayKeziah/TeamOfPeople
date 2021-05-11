@@ -59,7 +59,7 @@ public class HeroHealth : MonoBehaviour
          }
      }
 
-     private void updateHealthBar()
+     private void updateHealthBar(int originalHealth)
      {
         if(originalHealth != currentHealth) healthBar.SetHealth(currentHealth);
      }
