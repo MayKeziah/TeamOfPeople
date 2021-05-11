@@ -10,8 +10,9 @@ public class HeroHealth : MonoBehaviour
      public int currentHealth;
 
      // Cost fields
-     public int oxygenCostPerSecond = 20;
+     public int oxygenCostPerSecond = 1; // BUG: value of 1 or 200 doesn't seem to make a difference
      public int livingCostPerSecond = 1;
+     public int cost = 1;
 
      // Timers
      public Timer tLivingCost = new Timer();
@@ -23,7 +24,7 @@ public class HeroHealth : MonoBehaviour
          tLivingCost.setDuration(1f);
 
          // Set Oxygen cost timer info
-         tOxygenCost.setDuration(1f);
+         tOxygenCost.setDuration(1f/(float)oxygenCostPerSecond);
          
          // Set slider values
          currentHealth = maxHealth;
@@ -44,7 +45,7 @@ public class HeroHealth : MonoBehaviour
          // Reduce health bar because using oxygen
          if (Input.GetKey(KeyCode.Space) && tOxygenCost.timeIsUp())
          {
-            currentHealth -= oxygenCostPerSecond;
+            currentHealth -= cost;
             tOxygenCost.startTimer();
          }
      }
@@ -54,7 +55,7 @@ public class HeroHealth : MonoBehaviour
          // Reduce health bar for living cost
          if (tLivingCost.timeIsUp())
          {
-            currentHealth -= livingCostPerSecond;
+            currentHealth -= cost;
             tLivingCost.startTimer();
          }
      }
