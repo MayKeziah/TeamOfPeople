@@ -31,10 +31,12 @@ public class HeroHealth : MonoBehaviour
      }
 
      private void Update()
-     {
+     {   
+         int originalHealth = currentHealth;
          checkUsingOxygen();
          livingCost();
-         healthBar.SetHealth(currentHealth);
+         updateHealthBar(originalHealth);
+         
      }
 
      private void checkUsingOxygen()
@@ -55,5 +57,10 @@ public class HeroHealth : MonoBehaviour
             currentHealth -= livingCostPerSecond;
             tLivingCost.startTimer();
          }
+     }
+
+     private void updateHealthBar()
+     {
+        if(originalHealth != currentHealth) healthBar.SetHealth(currentHealth);
      }
 }
