@@ -462,7 +462,7 @@ GameObject:
   - component: {fileID: 461908793}
   - component: {fileID: 461908792}
   m_Layer: 0
-  m_Name: wall (18)
+  m_Name: unlock3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1037,7 +1037,7 @@ GameObject:
   - component: {fileID: 985103536}
   - component: {fileID: 985103535}
   m_Layer: 0
-  m_Name: wall (28)
+  m_Name: unlock4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1775,7 +1775,7 @@ GameObject:
   - component: {fileID: 1487200488}
   - component: {fileID: 1487200487}
   m_Layer: 0
-  m_Name: wall (29)
+  m_Name: unlock5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2010,6 +2010,55 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1808046328
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1808046330}
+  - component: {fileID: 1808046329}
+  m_Layer: 0
+  m_Name: WallController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1808046329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808046328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eda83eaa7a4d8d649a0d577c8159a4b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unlockingWalls:
+  - {fileID: 1849265310}
+  - {fileID: 2050439526}
+  - {fileID: 461908791}
+  - {fileID: 985103534}
+  - {fileID: 1487200486}
+--- !u!4 &1808046330
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808046328}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -368.8446, y: -58.486046, z: -1489.9656}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 31
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1812195872
 GameObject:
   m_ObjectHideFlags: 0
@@ -2185,7 +2234,7 @@ GameObject:
   - component: {fileID: 1849265312}
   - component: {fileID: 1849265311}
   m_Layer: 0
-  m_Name: wall (7)
+  m_Name: unlock1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2513,7 +2562,7 @@ GameObject:
   - component: {fileID: 2050439528}
   - component: {fileID: 2050439527}
   m_Layer: 0
-  m_Name: wall (11)
+  m_Name: unlock2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
