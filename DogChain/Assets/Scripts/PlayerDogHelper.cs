@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerDogHelper : MonoBehaviour
 {
+    public Rigidbody2D rb2d;
     public GameObject spaceship;
     public List<SlugDog> dogChain = new List<SlugDog>();
     //                          ^
@@ -15,7 +16,7 @@ public class PlayerDogHelper : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb2d = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
