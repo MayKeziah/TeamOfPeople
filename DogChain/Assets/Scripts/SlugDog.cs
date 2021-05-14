@@ -14,11 +14,15 @@ public class SlugDog : MonoBehaviour
     // If another dog is already present in the chain, a new dog should not follow the player but rather the other dog instead.
     private SlugDog followMe;
 
-    public float moveSpeed = 1f;
-    public float reactionSpeed = 1f;
-    public float attractRadius = 1f;
-    public float followRadius = 3f;
-    public float spinDuration = 1f;
+    public float moveSpeed = 3f;
+    public float reactionSpeed = 3f;
+    private float reactionTime;
+    private bool isReacting = false;
+    public float attractRadius = 2f;
+    public float followRadius = 8f;
+    public float spinDuration = 0.5f;
+    private float spinTime;
+    private bool isSpinning = false;
 
     public enum dogState 
     {
@@ -91,15 +95,22 @@ public class SlugDog : MonoBehaviour
             if (Vector2.Distance(thePlayer.transform.position, transform.position) < followRadius && Vector2.Distance(thePlayer.transform.position, transform.position) > attractRadius)
             {
                 // If the player is moving, but the dog is not, then we need the dog to "react" before it starts moving.
-                if (!(thePlayer.rb2d.IsSleeping()) && rb2d.IsSleeping()) 
+                if (!isReacting && /*!(thePlayer.rb2d.IsSleeping()) &&*/ rb2d.IsSleeping()) 
                 {
-                    float reactionTime = Time.time + reactionSpeed;
-                    while (Time.time < reactionTime) 
-                    {
-                        
-                    }
+                    isReacting = true;
+                    reactionTime = Time.time + reactionSpeed;
                 }
-                transform.position = Vector2.MoveTowards(transform.position, thePlayer.transform.position, Time.deltaTime * moveSpeed);
+
+                if (Time.time > reactionTime) 
+                {
+                    isReacting = false;
+                }
+
+                if (!isReacting) 
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, thePlayer.transform.position, Time.deltaTime * moveSpeed);
+                }
+                
             }
             // If the dog gets too far away from the player (probably if it gets stuck behind a wall), stop following
             else if (Vector2.Distance(thePlayer.transform.position, transform.position) > followRadius)
@@ -120,15 +131,18 @@ public class SlugDog : MonoBehaviour
             if (Vector2.Distance(followMe.transform.position, transform.position) < followRadius && Vector2.Distance(followMe.transform.position, transform.position) > attractRadius)
             {
                 // If the player is moving, but the dog is not, then we need the dog to "react" before it starts moving.
-                if (!(followMe.rb2d.IsSleeping()) && rb2d.IsSleeping()) 
+                if (!isReacting && !(followMe.rb2d.IsSleeping()) && rb2d.IsSleeping()) 
                 {
-                    float reactionTime = Time.time + reactionSpeed;
-                    while (Time.time < reactionTime) 
-                    {
-                        
-                    }
+                    isReacting = true;
+                    reactionTime = Time.time + reactionSpeed;
                 }
-                transform.position = Vector2.MoveTowards(transform.position, followMe.transform.position, Time.deltaTime * moveSpeed);
+
+                if (Time.time < reactionTime) 
+                {
+                    isReacting = false;
+                    transform.position = Vector2.MoveTowards(transform.position, followMe.transform.position, Time.deltaTime * moveSpeed);
+                }
+                
             }
             // If the dog gets too far away from the target dog, stop following
             else if (Vector2.Distance(followMe.transform.position, transform.position) > followRadius)
@@ -140,16 +154,27 @@ public class SlugDog : MonoBehaviour
 
     void Spin() 
     {
-        float spinTime = Time.time + spinDuration;
-        // speen
-        while (Time.time < spinTime) 
-        {
-            transform.Rotate(4f, 0.0f, 0.0f, Space.Self);
+        if (!isSpinning) {
+            isSpinning = true;
+            spinTime = Time.time + spinDuration;
         }
-        // Make sure dog's rotation is reset to (0, 0, 0)
-        transform.rotation = Quaternion.identity;
 
-        ChangeState(dogState.Chained);
+        // speen
+        if (isSpinning && Time.time < spinTime)
+        {
+            transform.Rotate(0f, 0f, 1f, Space.Self);
+        }
+        else if (isSpinning)
+        {
+            isSpinning = false;
+            spinTime = 0f;
+
+            // Make sure dog's rotation is reset to (0, 0, 0)
+            transform.rotation = Quaternion.identity;
+
+            ChangeState(dogState.Chained);
+        }
+        
     }
 
     void GoToSpaceship() 
