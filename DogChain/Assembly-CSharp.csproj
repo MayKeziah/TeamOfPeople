@@ -47,13 +47,13 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\FrictionChallenge\Scripts\FrictionOnTrigger.cs" />
-     <Compile Include="Assets\LandscapeUnlocking\WallsUnlock.cs" />
+     <Compile Include="Assets\Scripts\FrictionOnTriggerChallenge\FrictionOnTrigger.cs" />
+     <Compile Include="Assets\Scripts\LandscapeUnlocking\WallsUnlock.cs" />
      <Compile Include="Assets\Scripts\PlayerMoveWithOxygen\MouseCursor.cs" />
      <Compile Include="Assets\Scripts\PlayerMovementThroughFriction\PlayerControllerFriction.cs" />
-     <Compile Include="Assets\src\HealthBar.cs" />
-     <Compile Include="Assets\src\Timer.cs" />
-     <Compile Include="Assets\src\HeroHealth.cs" />
+     <Compile Include="Assets\Scripts\HealthBar\HealthBar.cs" />
+     <Compile Include="Assets\Scripts\HealthBar\Timer.cs" />
+     <Compile Include="Assets\Scripts\HealthBar\HeroHealth.cs" />
      <Compile Include="Assets\Scripts\PlayerMovementThroughFriction\FrictionZone.cs" />
      <Compile Include="Assets\Scripts\PlayerMovementThroughFriction\MouseCursorFriction.cs" />
      <Compile Include="Assets\Scripts\PlayerMoveWithOxygen\PlayerController.cs" />
