@@ -223,21 +223,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 280116297}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7ee144846ea4d54ab561b98ed24c4f1, type: 3}
+  m_Script: {fileID: 11500000, guid: 6dda3ca7d7b61404fa1ee402add6c7f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 280116299}
   gradient:
     serializedVersion: 2
-    key0: {r: 1, g: 0.0064516133, b: 0, a: 1}
-    key1: {r: 1, g: 0.91147983, b: 0, a: 1}
-    key2: {r: 0.3638364, g: 1, b: 0, a: 0}
+    key0: {r: 1, g: 0, b: 0, a: 1}
+    key1: {r: 1, g: 0.9896072, b: 0, a: 1}
+    key2: {r: 0, g: 1, b: 0.06572652, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 13107
+    ctime0: 16384
     ctime1: 32768
     ctime2: 65535
     ctime3: 0
@@ -460,14 +460,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1152375978}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fce95f66cbd80a24dbabbe9f572fcfc2, type: 3}
+  m_Script: {fileID: 11500000, guid: db404466c3bbaf249ae7118e07633be0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 280116300}
   maxHealth: 100
   currentHealth: 0
-  oxygenCostPerSecond: 1
+  oxygenCostPerSecond: 200
   livingCostPerSecond: 1
+  cost: 1
 --- !u!4 &1152375980
 Transform:
   m_ObjectHideFlags: 0
