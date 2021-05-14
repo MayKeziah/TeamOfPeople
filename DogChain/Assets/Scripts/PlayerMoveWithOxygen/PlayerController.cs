@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
         newPos += velocity;
         transform.position = newPos;
         velocity *= 0.99f; //slow down by 1% of current speed
-        Debug.Log(velocity);
+        //Debug.Log(velocity);
     }
 
     //returns the ratio of the displayed screen in W/H

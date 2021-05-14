@@ -10,6 +10,10 @@ public class PlayerControllerFriction : MonoBehaviour
 
     private Vector3 velocity;
 
+    private bool inFrictionZone = false;
+
+    private FrictionZone currentZone = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,13 +62,39 @@ public class PlayerControllerFriction : MonoBehaviour
         Vector3 newPos = transform.position;
         newPos += velocity;
         transform.position = newPos;
-        velocity *= 0.99f; //slow down by 1% of current speed
-        Debug.Log(velocity);
+        if (!inFrictionZone)
+        {
+            velocity *= 0.99f; //slow down by 1% of current speed
+        }
+        else
+        {
+            velocity *= currentZone.frictionModifier;
+        }
+        //Debug.Log(velocity);
     }
 
     //returns the ratio of the displayed screen in W/H
     public float getScreenRatio()
     {
         return ((float)Screen.width) / Screen.height;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //Debug.Log("in zone");
+        if (collision.gameObject.GetComponent<FrictionZone>() != null)
+        {
+            //Debug.Log("not null");
+            currentZone = collision.gameObject.GetComponent<FrictionZone>();
+            inFrictionZone = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<FrictionZone>() != null)
+        {
+            inFrictionZone = false;
+        }
     }
 }
