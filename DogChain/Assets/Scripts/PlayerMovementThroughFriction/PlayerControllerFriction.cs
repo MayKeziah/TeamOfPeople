@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerControllerFriction : MonoBehaviour
 {
-
     public Camera mainCam; //this should be set to the main camera of the scene
 
     public float accelerationSpeed = 0.001f; //this is the rate at which the player accelerates
@@ -21,7 +20,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Vector3 mousePos = GetMouseWorldPosition();
-        MouseCursor.setPosition(mousePos);
+        MouseCursorFriction.setPosition(mousePos);
         if (Input.GetMouseButton(0))
         {
             AcceleratePlayer(mousePos);

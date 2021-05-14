@@ -58,6 +58,9 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\PlayerMoveWithOxygen\PlayerController.cs" />
     <Compile Include="Assets\Scripts\PlayerMoveWithOxygen\MouseCursor.cs" />
+    <Compile Include="Assets\Scripts\PlayerMovementThroughFriction\PlayerControllerFriction.cs" />
+    <Compile Include="Assets\Scripts\PlayerMovementThroughFriction\MouseCursorFriction.cs" />
+    <Compile Include="Assets\Scripts\PlayerMovementThroughFriction\FrictionZone.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
