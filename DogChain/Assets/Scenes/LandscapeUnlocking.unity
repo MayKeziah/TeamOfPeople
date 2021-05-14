@@ -2036,7 +2036,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1808046328}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eda83eaa7a4d8d649a0d577c8159a4b7, type: 3}
+  m_Script: {fileID: 11500000, guid: fd45bb501eb0e6449b76ac990e1e4a16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   unlockingWalls:
