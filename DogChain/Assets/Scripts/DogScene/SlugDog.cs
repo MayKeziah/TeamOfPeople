@@ -14,15 +14,18 @@ public class SlugDog : MonoBehaviour
     // If another dog is already present in the chain, a new dog should not follow the player but rather the other dog instead.
     private SlugDog followMe;
 
-    public float moveSpeed = 3f;
-    public float reactionSpeed = 3f;
+    public float moveSpeed = 5f;
+    public float reactionSpeed = 1f;
     private float reactionTime;
     private bool isReacting = false;
+    private bool isChasing = false;
     public float attractRadius = 2f;
     public float followRadius = 8f;
     public float spinDuration = 0.5f;
     private float spinTime;
     private bool isSpinning = false;
+
+    private Color originalColor;
 
     public enum dogState 
     {
@@ -37,7 +40,12 @@ public class SlugDog : MonoBehaviour
     void Start() 
     {
         rb2d = GetComponent<Rigidbody2D>();
+        originalColor = GetComponent<SpriteRenderer>().color;
         spaceship = thePlayer.spaceship;
+
+        if (followRadius <= attractRadius) {
+            Debug.LogWarning("Warning: followRadius is less than attractRadius for a dog.");
+        }
     }
 
     // Update is called once per frame
@@ -94,30 +102,35 @@ public class SlugDog : MonoBehaviour
             // If the dog is still within the range in which it will follow the player (will stop when within the original attractRadius)
             if (Vector2.Distance(thePlayer.transform.position, transform.position) < followRadius && Vector2.Distance(thePlayer.transform.position, transform.position) > attractRadius)
             {
-                // If the player is moving, but the dog is not, then we need the dog to "react" before it starts moving.
-                if (!isReacting && /*!(thePlayer.rb2d.IsSleeping()) &&*/ rb2d.IsSleeping()) 
+                // If the dog is the sweet spot range between the attract and follow radius, then we need the dog to "react" before it starts moving.
+                if (!isReacting && !isChasing) 
                 {
                     isReacting = true;
                     reactionTime = Time.time + reactionSpeed;
                 }
 
-                if (Time.time > reactionTime) 
+                if (isReacting && Time.time > reactionTime) 
                 {
+                    isChasing = true;
                     isReacting = false;
                 }
 
-                if (!isReacting) 
+                if (isChasing) 
                 {
                     transform.position = Vector2.MoveTowards(transform.position, thePlayer.transform.position, Time.deltaTime * moveSpeed);
                 }
                 
             }
-            // If the dog gets too far away from the player (probably if it gets stuck behind a wall), stop following
-            else if (Vector2.Distance(thePlayer.transform.position, transform.position) > followRadius)
+            // If the dog gets too far away from the player (probably if it gets stuck behind a wall), stop following it completely
+            else if (Vector2.Distance(thePlayer.transform.position, transform.position) >= followRadius)
             {
                 RemoveFromChain();
             }
-
+            // If the dog gets as close as it can to the player, it is still chained but should no longer chase.
+            else if (Vector2.Distance(thePlayer.transform.position, transform.position) <= attractRadius) 
+            {
+                isChasing = false;
+            }
         } 
         // Dogs following nothing or other, inactive dogs should become inactive themselves.
         else if (followMe == null || followMe.GetState() == dogState.Inactive) 
@@ -130,24 +143,34 @@ public class SlugDog : MonoBehaviour
             // If the dog is still within the range in which it will follow the dog (will stop when within the original attractRadius)
             if (Vector2.Distance(followMe.transform.position, transform.position) < followRadius && Vector2.Distance(followMe.transform.position, transform.position) > attractRadius)
             {
-                // If the player is moving, but the dog is not, then we need the dog to "react" before it starts moving.
-                if (!isReacting && !(followMe.rb2d.IsSleeping()) && rb2d.IsSleeping()) 
+                // If the dog is the sweet spot range between the attract and follow radius, then we need the dog to "react" before it starts moving.
+                if (!isReacting && !isChasing) 
                 {
                     isReacting = true;
                     reactionTime = Time.time + reactionSpeed;
                 }
 
-                if (Time.time < reactionTime) 
+                if (isReacting && Time.time > reactionTime) 
                 {
+                    isChasing = true;
                     isReacting = false;
+                }
+
+                if (isChasing) 
+                {
                     transform.position = Vector2.MoveTowards(transform.position, followMe.transform.position, Time.deltaTime * moveSpeed);
                 }
                 
             }
             // If the dog gets too far away from the target dog, stop following
-            else if (Vector2.Distance(followMe.transform.position, transform.position) > followRadius)
+            else if (Vector2.Distance(followMe.transform.position, transform.position) >= followRadius)
             {
                 RemoveFromChain();
+            }
+            // If the dog gets as close as it can to the other dog, it is still chained but should no longer chase.
+            else if (Vector2.Distance(followMe.transform.position, transform.position) <= attractRadius) 
+            {
+                isChasing = false;
             }
         }
     }
@@ -157,6 +180,8 @@ public class SlugDog : MonoBehaviour
         if (!isSpinning) {
             isSpinning = true;
             spinTime = Time.time + spinDuration;
+            // Reset the color of this dog, in case it has previously gotten lost and turned red (see RemoveFromChain() below)
+            GetComponent<SpriteRenderer>().color = originalColor;
         }
 
         // speen
@@ -187,7 +212,7 @@ public class SlugDog : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject == spaceship) 
+        if (currentState == dogState.Spaceship && collision.gameObject == spaceship) 
         {
             // Delete this dog object and increment the amount of dogs the player has saved
             thePlayer.dogsRescued += 1;
@@ -198,10 +223,19 @@ public class SlugDog : MonoBehaviour
 
     void RemoveFromChain() 
     {
+        // Change color to red as a visual cue for the player
+        GetComponent<SpriteRenderer>().color = Color.red;
+
+        // The dog is removed from the dogChain/List and reverts to an inactive state.
         thePlayer.dogChain.Remove(this);
         ChangeState(dogState.Inactive);
+
+        // Reset some private variables to avoid future issues
         followPlayer = false;
         followMe = null;
+        isReacting = false;
+        isChasing = false;
+        isSpinning = false;
     }
 
     public void ChangeState(dogState newState) 
