@@ -36,10 +36,11 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\NextSceneButton\NextSceneButton.cs" />
+     <Compile Include="Assets\Scripts\SceneTransition\NextSceneButton.cs" />
      <Compile Include="Assets\Scripts\DogScene\WASDMovement.cs" />
      <Compile Include="Assets\Scripts\DogScene\PlayerDogHelper.cs" />
      <Compile Include="Assets\Scripts\DogScene\SlugDog.cs" />
+     <Compile Include="Assets\Scripts\SceneTransition\SceneTransitionHelper.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.7f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
