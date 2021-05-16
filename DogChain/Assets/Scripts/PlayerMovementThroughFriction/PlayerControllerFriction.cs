@@ -6,7 +6,7 @@ public class PlayerControllerFriction : MonoBehaviour
 {
     public Camera mainCam; //this should be set to the main camera of the scene
 
-    public float accelerationSpeed = 0.001f; //this is the rate at which the player accelerates
+    public float accelerationSpeed = 10f; //this is the rate at which the player accelerates
 
     private Vector3 velocity;
 
@@ -53,22 +53,24 @@ public class PlayerControllerFriction : MonoBehaviour
     private void AcceleratePlayer(Vector3 mousePos)
     {
         Vector3 diff = transform.position - mousePos;
-        velocity += ((diff.normalized) * accelerationSpeed);
+        velocity += ((diff.normalized) * accelerationSpeed) * Time.deltaTime;
     }
 
     //moves the player according to velocity and slows down velocity slightly
     private void MovePlayer()
     {
         Vector3 newPos = transform.position;
-        newPos += velocity;
+        newPos += velocity * Time.deltaTime;
         transform.position = newPos;
         if (!inFrictionZone)
         {
-            velocity *= 0.99f; //slow down by 1% of current speed
+            //velocity *= (0.99f + (0.01f * Time.deltaTime)); //slow down by 1% of current speed
+            velocity -= (velocity * 0.30f) * Time.deltaTime; //slow down by 30% every second
         }
         else
         {
-            velocity *= currentZone.frictionModifier;
+            //velocity *= (currentZone.frictionModifier + ((1f - currentZone.frictionModifier) * Time.deltaTime));
+            velocity -= (velocity * (1f-currentZone.frictionModifier)) * Time.deltaTime; //slow down by 1/frictionmodifier every second (.95 would be a 5% loss every second)
         }
         //Debug.Log(velocity);
     }
