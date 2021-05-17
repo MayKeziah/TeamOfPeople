@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/SwitchSceneButton.unity
+    guid: 1b00d553d1365f94a94945b7807ee213
+  - enabled: 1
     path: Assets/Scenes/HealthBar.unity
     guid: b5f7d1a34cf96e24cb706f979b752dbd
   - enabled: 1
@@ -23,7 +26,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DogScene.unity
     guid: ace73f69ddaf32f4d87e80cfbb29c6ca
-  - enabled: 1
-    path: Assets/Scenes/SwitchSceneButton.unity
-    guid: 1b00d553d1365f94a94945b7807ee213
   m_configObjects: {}
