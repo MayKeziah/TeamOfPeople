@@ -71,6 +71,8 @@
     <Compile Include="Assets\Playtest files\Scripts\PlayerMoveWithOxygen\PlayerController.cs" />
     <Compile Include="Assets\Playtest files\Scripts\DogScene\PlayerDogHelper.cs" />
     <Compile Include="Assets\Playtest files\Scripts\DogScene\SlugDog.cs" />
+    <Compile Include="Assets\Alpha files\Scripts\PlayerMovementController.cs" />
+    <Compile Include="Assets\Alpha files\Scripts\AlphaFrictionZone.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
