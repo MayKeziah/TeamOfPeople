@@ -385,7 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e616caced479fee45bcf6d80c00de962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frictionModifier: 0.5
+  frictionModifier: 0
 --- !u!1 &1596136053
 GameObject:
   m_ObjectHideFlags: 0
