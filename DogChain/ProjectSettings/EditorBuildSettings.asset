@@ -6,24 +6,24 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SwitchSceneButton.unity
+    path: Assets/Playtest files/Scenes/SwitchSceneButton.unity
     guid: 1b00d553d1365f94a94945b7807ee213
   - enabled: 1
-    path: Assets/Scenes/HealthBar.unity
+    path: Assets/Playtest files/Scenes/HealthBar.unity
     guid: b5f7d1a34cf96e24cb706f979b752dbd
   - enabled: 1
-    path: Assets/Scenes/PlayerMoveWithOxygen.unity
+    path: Assets/Playtest files/Scenes/PlayerMoveWithOxygen.unity
     guid: 8af4587470a86ce4eb2c5de3dd2ddc4a
   - enabled: 1
-    path: Assets/Scenes/PlayerMovementThroughFriction.unity
+    path: Assets/Playtest files/Scenes/PlayerMovementThroughFriction.unity
     guid: d556dcaa12a284f449892f3d19535452
   - enabled: 1
-    path: Assets/Scenes/FrictionChallenge.unity
+    path: Assets/Playtest files/Scenes/FrictionChallenge.unity
     guid: 97a5efa7ec4204c4da5949d3ce6b7b4a
   - enabled: 1
-    path: Assets/Scenes/LandscapeUnlocking.unity
+    path: Assets/Playtest files/Scenes/LandscapeUnlocking.unity
     guid: 27714507bca1ca84f8431a2e3fe72390
   - enabled: 1
-    path: Assets/Scenes/DogScene.unity
+    path: Assets/Playtest files/Scenes/DogScene.unity
     guid: ace73f69ddaf32f4d87e80cfbb29c6ca
   m_configObjects: {}
