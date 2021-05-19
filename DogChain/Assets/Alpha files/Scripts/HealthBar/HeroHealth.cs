@@ -43,7 +43,7 @@ public class HeroHealth : MonoBehaviour
      private void checkUsingOxygen()
      {
          // Reduce health bar because using oxygen
-         if (Input.GetKey(KeyCode.Space) && tOxygenCost.timeIsUp())
+         if (Input.GetMouseButton(0) && tOxygenCost.timeIsUp())
          {
             currentHealth -= cost;
             tOxygenCost.startTimer();
