@@ -80,6 +80,15 @@ public class PlayerMovementController : MonoBehaviour
         return ((float)Screen.width) / Screen.height;
     }
 
+    //aligns the X and Y position of the camera with the player
+    private void moveCameraToPlayer()
+    {
+        Vector3 newPos = mainCam.transform.position;
+        newPos.x = transform.position.x;
+        newPos.y = transform.position.y;
+        mainCam.transform.position = newPos;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Debug.Log("in zone");
