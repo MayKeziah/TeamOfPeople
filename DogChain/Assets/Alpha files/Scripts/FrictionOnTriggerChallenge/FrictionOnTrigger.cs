@@ -32,7 +32,7 @@ public class FrictionOnTrigger : MonoBehaviour
         Debug.Log("GenerateFZ!!");
         for (int i = 0; i < frictionCoords[challengeLevel].Length; ++i)
         {
-            GameObject e = Instantiate(Resources.Load("friction" + (challengeLevel + 1)) as GameObject);
+            GameObject e = Instantiate(Resources.Load("AlphaResources/Prefabs/friction" + (challengeLevel + 1)) as GameObject);
             e.transform.position = frictionCoords[challengeLevel][i];
             Debug.Log("Created friction: " + "Prefabs/friction" + (challengeLevel + 1) + " at: (" + 
             frictionCoords[challengeLevel][i].x + ", " + 
