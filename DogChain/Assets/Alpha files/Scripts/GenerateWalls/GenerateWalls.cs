@@ -15,12 +15,14 @@ public class GenerateWalls : MonoBehaviour
     private Vector2 worldMax;
 
     public WorldBounds world;
+    public float wallZ = 0;
     // Start is called before the first frame update
     void Start()
     {
         // world = GameObject.Find ("GameController").GetComponent<WorldBounds>();
         calculateDimensions();
         Debug.Log("wall X: " + brickDimensions);
+        createBoundaries();
     }
 
     // Update is called once per frame
@@ -46,24 +48,26 @@ public class GenerateWalls : MonoBehaviour
     {
         worldMin = world.WorldMin;
         worldMax = world.WorldMax;
-        worldWidthInBricks =  (int)( (worldMax.x - worldMin.x)/brickDimensions );
-        worldHeightInBricks = (int)( (worldMax.y - worldMin.y)/brickDimensions );
+        worldWidthInBricks =  (int)( (Mathf.Abs(worldMax.x - worldMin.x))/brickDimensions );
+        worldHeightInBricks = (int)( (Mathf.Abs(worldMax.y - worldMin.y))/brickDimensions );
     }
 
     void createBoundaries()
     {
-
+        createHorizontalBoundaries();
     }
     
     void createHorizontalBoundaries()
     {
-        for(int i = 0; i < worldWidthInBricks; ++i)
+        float halfBrick = brickDimensions/2f;
+        for(float x = worldMin.x + halfBrick*3; x < worldWidthInBricks/2f; x+=brickDimensions)
         {
-
+            newPermanentBrick(x, worldMin.y + halfBrick, wallZ);
+            newPermanentBrick(x, worldMax.y - halfBrick, wallZ);
         }
     }
 
-    private int newPermanentBrick(int x = 0, int y = 0, int z = 0)
+    private int newPermanentBrick(float x = 0f, float y = 0f, float z = 0f)
     {
         GameObject brick = Instantiate(Resources.Load("AlphaResources/Prefabs/WallBlock1")) as GameObject;
         brick.transform.position = new Vector3(x, y, z);
