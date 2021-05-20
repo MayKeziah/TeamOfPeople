@@ -14,6 +14,12 @@ public class GenerateWalls : MonoBehaviour
     private Vector2 worldMin;
     private Vector2 worldMax;
 
+    private float xMin;
+    private float xMax;
+    private float yMin;
+    private float yMax;
+    private float halfBrick;
+
     public WorldBounds world;
     public float wallZ = 0;
     // Start is called before the first frame update
@@ -35,7 +41,7 @@ public class GenerateWalls : MonoBehaviour
     {
         getBrickDimensions();
         getWorldDimensions();
-        Debug.Log("WidthInBricks: " +worldWidthInBricks + ", Height: " + worldWidthInBricks);
+        Debug.Log("WidthInBricks: " +worldWidthInBricks + ", Height: " + worldHeightInBricks);
     }
 
     private void getBrickDimensions()
@@ -43,14 +49,20 @@ public class GenerateWalls : MonoBehaviour
         brickDimensions = PermanentWalls[newPermanentBrick()].GetComponent<SpriteRenderer>().bounds.size.x;
         Destroy(PermanentWalls[PermanentWalls.Count - 1]);
         PermanentWalls.RemoveAt(PermanentWalls.Count - 1);
+        halfBrick = brickDimensions/2f;
     }
 
     private void getWorldDimensions()
     {
         worldMin = world.WorldMin;
         worldMax = world.WorldMax;
-        worldWidthInBricks =  (int)( ((Mathf.Abs(worldMax.x - worldMin.x))/brickDimensions ) );
-        worldHeightInBricks = (int)( ((Mathf.Abs(worldMax.y - worldMin.y))/brickDimensions ) );
+        worldWidthInBricks =  (int)( ((Mathf.Abs(worldMax.x - worldMin.x)) )/brickDimensions );
+        worldHeightInBricks = (int)( ((Mathf.Abs(worldMax.y - worldMin.y)) )/brickDimensions );
+
+        yMin = worldMin.y + halfBrick;
+        yMax = yMin + (worldHeightInBricks - 1)*brickDimensions;
+        xMin = worldMin.x + halfBrick;
+        xMax = xMin + (worldWidthInBricks - 1)*brickDimensions;
     }
 
     void createBoundaries()
@@ -61,21 +73,16 @@ public class GenerateWalls : MonoBehaviour
     
     void createHorizontalBoundaries()
     {
-        float halfBrick = brickDimensions/2f;
-        for(float x = worldMin.x + halfBrick*3; x < worldWidthInBricks/2; x+=brickDimensions)
+        for(float x = xMin; x <= xMax; x+=brickDimensions)
         {
-            newPermanentBrick(x, worldMin.y + halfBrick, wallZ);
-            newPermanentBrick(x, worldMax.y - halfBrick, wallZ);
+            newPermanentBrick(x, yMin, wallZ);
+            newPermanentBrick(x, yMax, wallZ);
         }
     }
 
     void createVerticalBoundaries()
     {
-        float halfBrick = brickDimensions/2f;
-        float xMin = worldMin.x + halfBrick*3;
-        // float xMax = -1 * xMin;
-        float xMax = xMin + (worldWidthInBricks - 2)*brickDimensions;
-        for(float y = worldMin.y + halfBrick*3; y < worldHeightInBricks/2 - brickDimensions; y+=brickDimensions)
+        for(float y = yMin; y <= yMax; y+=brickDimensions)
         {
             newPermanentBrick(xMin, y, wallZ);
             newPermanentBrick(xMax, y, wallZ);
