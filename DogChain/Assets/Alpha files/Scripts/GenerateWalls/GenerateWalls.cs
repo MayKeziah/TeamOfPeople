@@ -48,8 +48,8 @@ public class GenerateWalls : MonoBehaviour
     {
         worldMin = world.WorldMin;
         worldMax = world.WorldMax;
-        worldWidthInBricks =  (int)( (Mathf.Abs(worldMax.x - worldMin.x))/brickDimensions );
-        worldHeightInBricks = (int)( (Mathf.Abs(worldMax.y - worldMin.y))/brickDimensions );
+        worldWidthInBricks =  (int)( ((Mathf.Abs(worldMax.x - worldMin.x))/brickDimensions )/2 );
+        worldHeightInBricks = (int)( ((Mathf.Abs(worldMax.y - worldMin.y))/brickDimensions )/2 );
     }
 
     void createBoundaries()
@@ -60,7 +60,7 @@ public class GenerateWalls : MonoBehaviour
     void createHorizontalBoundaries()
     {
         float halfBrick = brickDimensions/2f;
-        for(float x = worldMin.x + halfBrick*3; x < worldWidthInBricks/2f; x+=brickDimensions)
+        for(float x = worldMin.x + halfBrick*3; x < worldWidthInBricks; x+=brickDimensions)
         {
             newPermanentBrick(x, worldMin.y + halfBrick, wallZ);
             newPermanentBrick(x, worldMax.y - halfBrick, wallZ);
