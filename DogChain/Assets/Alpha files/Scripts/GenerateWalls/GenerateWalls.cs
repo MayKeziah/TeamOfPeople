@@ -55,6 +55,7 @@ public class GenerateWalls : MonoBehaviour
     void createBoundaries()
     {
         createHorizontalBoundaries();
+        createVerticalBoundaries();
     }
     
     void createHorizontalBoundaries()
@@ -64,6 +65,18 @@ public class GenerateWalls : MonoBehaviour
         {
             newPermanentBrick(x, worldMin.y + halfBrick, wallZ);
             newPermanentBrick(x, worldMax.y - halfBrick, wallZ);
+        }
+    }
+
+    void createVerticalBoundaries()
+    {
+        float halfBrick = brickDimensions/2f;
+        float xMin = worldMin.x + halfBrick*3;
+        float xMax = -1 * xMin;
+        for(float y = worldMin.y + halfBrick*3; y < worldHeightInBricks - brickDimensions; y+=brickDimensions)
+        {
+            newPermanentBrick(xMin, y, wallZ);
+            newPermanentBrick(xMax, y, wallZ);
         }
     }
 
