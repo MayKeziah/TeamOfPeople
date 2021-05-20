@@ -28,7 +28,7 @@ public class GenerateWalls : MonoBehaviour
         // world = GameObject.Find ("GameController").GetComponent<WorldBounds>();
         calculateDimensions();
         Debug.Log("wall X: " + brickDimensions);
-        createBoundaries();
+        createBoundaries(xMin, xMax, yMin, yMax);
     }
 
     // Update is called once per frame
@@ -65,27 +65,27 @@ public class GenerateWalls : MonoBehaviour
         xMax = xMin + (worldWidthInBricks - 1)*brickDimensions;
     }
 
-    void createBoundaries()
+    void createBoundaries(float xMn, float xMx, float yMn, float yMx)
     {
-        createHorizontalBoundaries();
-        createVerticalBoundaries();
+        createHorizontalBoundaries(xMn, xMx, yMn, yMx);
+        createVerticalBoundaries(xMn, xMx, yMn, yMx);
     }
     
-    void createHorizontalBoundaries()
+    void createHorizontalBoundaries(float xMn, float xMx, float yMn, float yMx)
     {
-        for(float x = xMin; x <= xMax; x+=brickDimensions)
+        for(float x = xMn; x <= xMx; x+=brickDimensions)
         {
-            newPermanentBrick(x, yMin, wallZ);
-            newPermanentBrick(x, yMax, wallZ);
+            newPermanentBrick(x, yMn, wallZ);
+            newPermanentBrick(x, yMx, wallZ);
         }
     }
 
-    void createVerticalBoundaries()
+    void createVerticalBoundaries(float xMn, float xMx, float yMn, float yMx)
     {
-        for(float y = yMin; y <= yMax; y+=brickDimensions)
+        for(float y = yMn; y <= yMx; y+=brickDimensions)
         {
-            newPermanentBrick(xMin, y, wallZ);
-            newPermanentBrick(xMax, y, wallZ);
+            newPermanentBrick(xMn, y, wallZ);
+            newPermanentBrick(xMx, y, wallZ);
         }
     }
 
