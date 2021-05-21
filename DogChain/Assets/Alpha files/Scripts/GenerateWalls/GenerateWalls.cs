@@ -20,7 +20,7 @@ public class GenerateWalls : MonoBehaviour
     private float yMax;
     private float halfBrick;
 
-    public WorldBounds world;
+    public CameraSupport world;
     public float wallZ = 0;
     // Start is called before the first frame update
     void Start()
@@ -58,6 +58,7 @@ public class GenerateWalls : MonoBehaviour
         worldMax = world.WorldMax;
         worldWidthInBricks =  (int)( ((Mathf.Abs(worldMax.x - worldMin.x)) )/brickDimensions );
         worldHeightInBricks = (int)( ((Mathf.Abs(worldMax.y - worldMin.y)) )/brickDimensions );
+        Debug.Log("Min: (" + worldMin.x + ", " + worldMin.y + "), Max: (" + worldMax.x + ", " + worldMax.y + ")");
 
         yMin = worldMin.y + halfBrick;
         yMax = yMin + (worldHeightInBricks - 1)*brickDimensions;
