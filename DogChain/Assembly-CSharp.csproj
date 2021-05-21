@@ -47,16 +47,16 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Playtest files\Scripts\FrictionOnTriggerChallenge\FrictionOnTrigger.cs" />
+     <Compile Include="Assets\Alpha files\Scripts\FrictionOnTriggerChallenge\FrictionOnTrigger.cs" />
      <Compile Include="Assets\Playtest files\Scripts\LandscapeUnlocking\WallsUnlock.cs" />
      <Compile Include="Assets\Playtest files\Scripts\SceneTransition\NextSceneButton.cs" />
      <Compile Include="Assets\Alpha files\Scripts\PlayerMovementController.cs" />
      <Compile Include="Assets\Playtest files\Scripts\PlayerMoveWithOxygen\MouseCursor.cs" />
      <Compile Include="Assets\Playtest files\Scripts\PlayerMovementThroughFriction\PlayerControllerFriction.cs" />
-     <Compile Include="Assets\Playtest files\Scripts\HealthBar\HealthBar.cs" />
-     <Compile Include="Assets\Playtest files\Scripts\HealthBar\Timer.cs" />
+     <Compile Include="Assets\Alpha files\Scripts\HealthBar\HealthBar.cs" />
+     <Compile Include="Assets\Alpha files\Scripts\HealthBar\Timer.cs" />
      <Compile Include="Assets\Playtest files\Scripts\DogScene\WASDMovement.cs" />
-     <Compile Include="Assets\Playtest files\Scripts\HealthBar\HeroHealth.cs" />
+     <Compile Include="Assets\Alpha files\Scripts\HealthBar\HeroHealth.cs" />
      <Compile Include="Assets\Playtest files\Scripts\PlayerMovementThroughFriction\FrictionZone.cs" />
      <Compile Include="Assets\Playtest files\Scripts\SceneTransition\SceneTransitionHelper.cs" />
      <Compile Include="Assets\Playtest files\Scripts\PlayerMovementThroughFriction\MouseCursorFriction.cs" />
