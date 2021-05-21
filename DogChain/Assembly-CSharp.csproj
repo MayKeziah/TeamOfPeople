@@ -50,6 +50,7 @@
      <Compile Include="Assets\Alpha files\Scripts\FrictionOnTriggerChallenge\FrictionOnTrigger.cs" />
      <Compile Include="Assets\Playtest files\Scripts\LandscapeUnlocking\WallsUnlock.cs" />
      <Compile Include="Assets\Playtest files\Scripts\SceneTransition\NextSceneButton.cs" />
+     <Compile Include="Assets\Alpha files\Scripts\WorldCamera\WorldBounds.cs" />
      <Compile Include="Assets\Alpha files\Scripts\PlayerMovementController.cs" />
      <Compile Include="Assets\Playtest files\Scripts\PlayerMoveWithOxygen\MouseCursor.cs" />
      <Compile Include="Assets\Playtest files\Scripts\PlayerMovementThroughFriction\PlayerControllerFriction.cs" />
@@ -64,6 +65,7 @@
      <Compile Include="Assets\Playtest files\Scripts\DogScene\PlayerDogHelper.cs" />
      <Compile Include="Assets\Alpha files\Scripts\AlphaFrictionZone.cs" />
      <Compile Include="Assets\Playtest files\Scripts\DogScene\SlugDog.cs" />
+     <Compile Include="Assets\Alpha files\Scripts\GenerateWalls\GenerateWalls.cs" />
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.7f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>

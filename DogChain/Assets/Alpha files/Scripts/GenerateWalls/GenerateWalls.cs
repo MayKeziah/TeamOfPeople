@@ -73,6 +73,7 @@ public class GenerateWalls : MonoBehaviour
     
     void createHorizontalBoundaries(float xMn, float xMx, float yMn, float yMx)
     {
+        Debug.Log("Horizontal Checkpoint");
         for(float x = xMn; x <= xMx; x+=brickDimensions)
         {
             newPermanentBrick(x, yMn, wallZ);
@@ -82,6 +83,7 @@ public class GenerateWalls : MonoBehaviour
 
     void createVerticalBoundaries(float xMn, float xMx, float yMn, float yMx)
     {
+        Debug.Log("Vertical Checkpoint");
         for(float y = yMn; y <= yMx; y+=brickDimensions)
         {
             newPermanentBrick(xMn, y, wallZ);
@@ -94,6 +96,7 @@ public class GenerateWalls : MonoBehaviour
         GameObject brick = Instantiate(Resources.Load("AlphaResources/Prefabs/WallBlock1")) as GameObject;
         brick.transform.position = new Vector3(x, y, z);
         PermanentWalls.Add(brick);
+        Debug.Log("Wall added");
         return PermanentWalls.Count - 1;
     }
 }
