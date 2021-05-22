@@ -5,7 +5,7 @@ using UnityEngine;
 public class FrictionZone : MonoBehaviour
 {
 
-    public float frictionModifier = 0.95f; //represents the slowdown of the zone
+    public float frictionModifier = 0.50f; //represents the slowdown of the zone
 
     // Start is called before the first frame update
     void Start()
