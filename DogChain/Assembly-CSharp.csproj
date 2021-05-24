@@ -48,25 +48,24 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Alpha files\Scripts\FrictionOnTriggerChallenge\FrictionOnTrigger.cs" />
-     <Compile Include="Assets\Playtest files\Scripts\LandscapeUnlocking\WallsUnlock.cs" />
+     <Compile Include="Assets\Alpha files\Scripts\WorldCamera\WorldBounds.cs" />
      <Compile Include="Assets\Alpha files\Scripts\WorldCamera\CameraSupport.cs" />
      <Compile Include="Assets\Alpha files\Scripts\PlayerMovementController.cs" />
-     <Compile Include="Assets\Playtest files\Scripts\PlayerMoveWithOxygen\MouseCursor.cs" />
      <Compile Include="Assets\Alpha files\Scripts\DogManagement\SlugDog.cs" />
      <Compile Include="Assets\Alpha files\Scripts\DogManagement\PlayerDogHelper.cs" />
-     <Compile Include="Assets\Playtest files\Scripts\PlayerMovementThroughFriction\PlayerControllerFriction.cs" />
      <Compile Include="Assets\Alpha files\Scripts\HealthBar\HealthBar.cs" />
      <Compile Include="Assets\Alpha files\Scripts\HealthBar\Timer.cs" />
+     <Compile Include="Assets\Alpha files\Scripts\GenerateWalls\Wall.cs" />
      <Compile Include="Assets\Alpha files\Scripts\AlphaWallController.cs" />
-     <Compile Include="Assets\Playtest files\Scripts\DogScene\WASDMovement.cs" />
      <Compile Include="Assets\Alpha files\Scripts\HealthBar\HeroHealth.cs" />
-     <Compile Include="Assets\Playtest files\Scripts\PlayerMovementThroughFriction\FrictionZone.cs" />
      <Compile Include="Assets\Alpha files\Scripts\SceneTransition\NextSceneButton.cs" />
-     <Compile Include="Assets\Playtest files\Scripts\PlayerMovementThroughFriction\MouseCursorFriction.cs" />
-     <Compile Include="Assets\Playtest files\Scripts\PlayerMoveWithOxygen\PlayerController.cs" />
+     <Compile Include="Assets\Alpha files\Scripts\GenerateWalls\SerializeList.cs" />
      <Compile Include="Assets\Alpha files\Scripts\SceneTransition\SceneTransitionHelper.cs" />
      <Compile Include="Assets\Alpha files\Scripts\AlphaFrictionZone.cs" />
+     <Compile Include="Assets\Alpha files\Scripts\GenerateWalls\StoredMaps.cs" />
      <Compile Include="Assets\Alpha files\Scripts\GenerateWalls\GenerateWalls.cs" />
+     <Compile Include="Assets\Alpha files\Scripts\GenerateWalls\Direction.cs" />
+     <None Include="Assets\Alpha files\Scripts\GenerateWalls\maps.txt" />
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.7f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>
