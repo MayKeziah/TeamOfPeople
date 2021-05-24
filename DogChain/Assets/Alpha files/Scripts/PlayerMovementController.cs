@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO.MemoryMappedFiles;
 using UnityEngine;
 
 public class PlayerMovementController : MonoBehaviour
@@ -13,6 +14,8 @@ public class PlayerMovementController : MonoBehaviour
     private bool inFrictionZone = false;
 
     private AlphaFrictionZone currentZone = null;
+
+    private bool wallThisFrame = false; //boolean for multiple wall collision prevention
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +32,7 @@ public class PlayerMovementController : MonoBehaviour
             AcceleratePlayer(mousePos);
         }
         MovePlayer();
+        wallThisFrame = false;
     }
 
     //gets the mouse's relative world position in xy coordinates
@@ -98,6 +102,132 @@ public class PlayerMovementController : MonoBehaviour
             currentZone = collision.gameObject.GetComponent<AlphaFrictionZone>();
             inFrictionZone = true;
         }
+        if (collision.gameObject.GetComponent<AlphaWallController>() != null)
+        {
+            switch (collision.gameObject.GetComponent<AlphaWallController>().getWallType())
+            {
+                case AlphaWallController.WallType.Bouncy:
+                    if (!wallThisFrame)
+                    {
+                        velocity = -velocity;
+                        wallThisFrame = true;
+                    }
+                    break;
+                case AlphaWallController.WallType.Reflective:
+                    //in essence, this bounce type is supposed to do two things.
+                    //1. to figure out what "side" of the wall the player collided with (the hard part)
+                    //2. to reflect the correct portion of the player's velocity (the easy part).
+                    //for the four surfaces to reflect off of:
+                    //R = +-
+                    //U = ++
+                    //L = -+
+                    //D = --
+                    //where the first +/- is the UR vector comparison (cosUR)
+                    //and the second is the UL vector comparison. (cosUL)
+                    //
+                    //Math done:
+                    //
+                    //essentially, what I'm doing here is finding the vector between the player
+                    //and the wall (displacement is the variable name), and then comparing that
+                    //to two static vector directions in order to find the side of the wall that
+                    //the player collided with.
+                    //what the dot product finds here is the product of both vector's magnitudes,
+                    //as well as the cosine of the angle between the two, what having two of these
+                    //reference vectors allows is to basically put a big X in the wall box, which
+                    //gives four seperate possible combinations of cos(theta) being positive or negative,
+                    //which translates as shown above.
+                    //
+                    //for reflecting the player I just reverse the x or y component of the velocity
+                    //vector based on which quadrant the player is in.
+                    //
+                    //worth noting is that this solution only works when the wall is a perfect square.
+                    //otherwise some more math needs to be done in order to account for the height/width
+                    //of the wall
+                    if (!wallThisFrame)
+                    {
+                        Vector2 simplePlayer = this.transform.position;
+                        Vector2 simpleCollide = collision.transform.position;
+                        Vector2 displacement = (simplePlayer - simpleCollide); //vector from wall to player
+                        Vector2 UR = Vector2.up + Vector2.right; //diagonal up-right vector
+                        Vector2 UL = Vector2.up + Vector2.left; //diagonal up-left vector
+                        float cosUR = Vector2.Dot(displacement, UR) / (displacement.magnitude * UR.magnitude);// 
+                        float cosUL = Vector2.Dot(displacement, UL) / (displacement.magnitude * UL.magnitude); // 
+                                                                                                               //Debug.Log(cosUR);
+                                                                                                               //Debug.Log(cosUL);
+                        if (cosUR > 0f && cosUL < 0f || cosUR < 0f && cosUL > 0f) //hit the right or left side of the wall
+                        {
+                            velocity.x = -velocity.x;
+                        }
+                        else if (cosUR > 0f && cosUL > 0f || cosUR < 0f && cosUL < 0f) //hit the up or down side of the wall
+                        {
+                            velocity.y = -velocity.y;
+                        }
+                        wallThisFrame = true;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<AlphaWallController>() != null)//means the player is in the wall
+        {
+            //this uses the same math as the reflective wall collision does, and pushes the player to the side they should be on
+            Vector2 simplePlayer = this.transform.position;
+            Vector2 simpleCollide = collision.transform.position;
+            Vector2 displacement = (simplePlayer - simpleCollide); //vector from wall to player
+            Vector2 UR = Vector2.up + Vector2.right; //diagonal up-right vector
+            Vector2 UL = Vector2.up + Vector2.left; //diagonal up-left vector
+            float cosUR = Vector2.Dot(displacement, UR) / (displacement.magnitude * UR.magnitude);// 
+            float cosUL = Vector2.Dot(displacement, UL) / (displacement.magnitude * UL.magnitude); // 
+                                                                                                   //Debug.Log(cosUR);
+                                                                                                   //Debug.Log(cosUL);
+            if (cosUR > 0f && cosUL < 0f) //hit the right
+            {
+                //first, get the distance of the center of the wall to the right of the wall,
+                //plus the distance of the center of the player to the left of the player.
+                float xTohit = (collision.transform.localScale.x/2f) + (this.transform.localScale.x/2f);
+                //then add that to the wall's current position (plus a little boundary for consistency)
+                xTohit += simpleCollide.x + 0.01f;
+                //xtohit is now the x position we want the player in to get them out of the wall
+                Vector3 newpos = transform.position;
+                newpos.x = xTohit;
+                transform.position = newpos;
+            }
+            else if (cosUR < 0f && cosUL > 0f)//hit left
+            {
+                //same as hit right but negated in some parts to place to the left
+                float xTohit = -(collision.transform.localScale.x / 2f) - (this.transform.localScale.x / 2f);
+                xTohit += simpleCollide.x - 0.01f;
+                Vector3 newpos = transform.position;
+                newpos.x = xTohit;
+                transform.position = newpos;
+            }
+            else if (cosUR > 0f && cosUL > 0f) //hit the up
+            {
+                //first, get the distance of the center of the wall to the top of the wall,
+                //plus the distance of the center of the player to the bottom of the player.
+                float yTohit = (collision.transform.localScale.y / 2f) + (this.transform.localScale.y / 2f);
+                //then add that to the wall's current position (plus a little boundary for consistency)
+                yTohit += simpleCollide.y + 0.01f;
+                //xtohit is now the x position we want the player in to get them out of the wall
+                Vector3 newpos = transform.position;
+                newpos.y = yTohit;
+                transform.position = newpos;
+            }
+            else if (cosUR < 0f && cosUL < 0f) //hit down
+            {
+                //same as hit top but with some parts negated
+                float yTohit = -(collision.transform.localScale.y / 2f) - (this.transform.localScale.y / 2f);
+                yTohit += simpleCollide.y - 0.01f;
+                Vector3 newpos = transform.position;
+                newpos.y = yTohit;
+                transform.position = newpos;
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -107,4 +237,5 @@ public class PlayerMovementController : MonoBehaviour
             inFrictionZone = false;
         }
     }
+
 }
