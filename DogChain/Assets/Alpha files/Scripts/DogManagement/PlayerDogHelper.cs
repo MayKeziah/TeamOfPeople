@@ -44,4 +44,9 @@ public class PlayerDogHelper : MonoBehaviour
         dogChain.Clear();
     }
 
+    int GetDogsInPossession() 
+    {
+        return (dogsRescued + dogChain.Count);
+    }
+
 }
