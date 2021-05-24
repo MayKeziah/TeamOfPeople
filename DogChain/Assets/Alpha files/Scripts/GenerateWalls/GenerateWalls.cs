@@ -4,11 +4,25 @@ using UnityEngine;
 
 public class GenerateWalls : MonoBehaviour
 {
+    // testing mode on/off
+    public bool testingMode = false;    
+    public int mapFieldsLength = 1;
+
+
+    // World Boundaries
+    public float xMin;
+    public float xMax;
+    public float yMin;
+    public float yMax;    
+    public float wallZ = 0;
+
+
     // Lists of walls
     private List<List<GameObject>> PermanentWalls = new List<List<GameObject>>();
     private List<List<GameObject>> TempWalls = new List<List<GameObject>>();
     private List<List<GameObject>> Boundaries = new List<List<GameObject>>();
-    // public List<List<int>> mapFields = new List<List<int>>(); // len, x, y, directionx, directiony
+    private List<GameObject> StoredBricks = new List<GameObject>();
+
 
     // inner map
     public List<int> lengths = new List<int>();
@@ -16,7 +30,7 @@ public class GenerateWalls : MonoBehaviour
     public List<int> yCoords = new List<int>();
     public List<Direction> directions = new List<Direction>();
     public List<string> types = new List<string>();
-    private int mapFieldsLength = 10;
+
 
     // Brick-grid dimensions
     private float brickDimensions;
@@ -29,29 +43,26 @@ public class GenerateWalls : MonoBehaviour
     private Vector2 worldMin;
     private Vector2 worldMax;
 
-
-    // World Boundaries
-    public float xMin;
-    public float xMax;
-    public float yMin;
-    public float yMax;    
-    public float wallZ = 0;
-
     
     // Main Camera data
     public CameraSupport world;
+
+
+    //
+    public StoredMaps storedMaps = new StoredMaps();
+
 
     // Serialization of testmode map configurations for future use
     private SerializeList map = new SerializeList();
 
 
-    // testing mode on/off
-    public bool testingMode = false;
-
-
     // Wall brick prefab names
     private const string permanent = "Wall";
-    private const string temporary = "WallBlock1";
+    private const string temporary = "Door";
+
+    // serialization files
+    private const string pDest = "permanent.txt";
+    private const string tDest = "temp.txt";
 
 
     // the direction of the wall from the starting coordinate
@@ -77,11 +88,32 @@ public class GenerateWalls : MonoBehaviour
     // Allows realtime testing of wall variables
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P)) map.serialize(PermanentWalls);
+        if(Input.GetKeyDown(KeyCode.P)) 
+        {
+            map.serialize(PermanentWalls, pDest);
+            map.serialize(TempWalls, tDest);
+        }
         if(testingMode) generateWalls();
         // to test different configurations:
         //  run the scene, click GameController, select "TestingMode".
         //  Now you can adjust the wall dimensions, perimeter dimensions, & the position of the perimeter. 
+    }
+
+    private void deserialize()
+    {
+        for (int i = 0; i < storedMaps.Perm1.Length; ++i)
+        {
+            StoredBricks.Add(newBrick
+                (storedMaps.Perm1[i].x, storedMaps.Perm1[i].y, permanent)
+            );
+            
+        }
+        for (int i = 0; i < storedMaps.Temp1.Length; ++i)
+        {
+            StoredBricks.Add(newBrick
+                (storedMaps.Temp1[i].x, storedMaps.Temp1[i].y, temporary)
+            );
+        }
     }
 
     private void starterWalls()
@@ -106,7 +138,8 @@ public class GenerateWalls : MonoBehaviour
             updateWalls();
         }
         createBoundaries(0, worldWidthInBricks - 1, 0, worldHeightInBricks - 1);
-        createPermanentWalls();
+        deserialize();
+        createWalls();
     }
 
     void newStandardWall(string type)
@@ -123,21 +156,22 @@ public class GenerateWalls : MonoBehaviour
         // ++mapFieldsLength;
     }
 
-    private void createPermanentWalls()
+    private void createWalls()
     {
         for (int i = 0; i < lengths.Count; ++i)
         {
-            PermanentWalls.Add(newWall(lengths[i], xCoords[i], yCoords[i], directions[i], types[i]));
+            if(types[i].Equals(permanent)) PermanentWalls.Add(newWall(lengths[i], xCoords[i], yCoords[i], directions[i], types[i]));
+            else if(types[i].Equals(temporary)) TempWalls.Add(newWall(lengths[i], xCoords[i], yCoords[i], directions[i], types[i]));
         }
     }
 
     private void updateWalls()
     {
-        // while(mapFieldsLength > lengths.Count)
-        // {
-        //     newStandardWall(permanent);
-        // }
-        createPermanentWalls();
+        while(mapFieldsLength > lengths.Count)
+        {
+            newStandardWall(permanent);
+        }
+        createWalls();
     }
 
     // Destroys all walls
@@ -154,6 +188,9 @@ public class GenerateWalls : MonoBehaviour
             foreach (GameObject brick in list) Destroy(brick);
         foreach(List<GameObject> list in Boundaries)
             foreach (GameObject brick in list) Destroy(brick);
+
+        PermanentWalls.Clear();
+        Boundaries.Clear();
     }
 
     // Destroys all temporary walls
@@ -161,7 +198,7 @@ public class GenerateWalls : MonoBehaviour
     {
         foreach(List<GameObject> list in TempWalls)
             foreach (GameObject brick in list) Destroy(brick);
-         
+        TempWalls.Clear();
     }
 
     // calculates the dimensions of the brick and the world, updates state
