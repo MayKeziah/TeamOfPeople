@@ -94,7 +94,7 @@ public class GenerateWalls : MonoBehaviour
 
     private int newPermanentBrick(float x = 0f, float y = 0f, float z = 0f)
     {
-        GameObject brick = Instantiate(Resources.Load("AlphaResources/Prefabs/WallBlock1")) as GameObject;
+        GameObject brick = Instantiate(Resources.Load("AlphaResources/Prefabs/Wall")) as GameObject;
         brick.transform.position = new Vector3(x, y, z);
         PermanentWalls.Add(brick);
         Debug.Log("Wall added");
