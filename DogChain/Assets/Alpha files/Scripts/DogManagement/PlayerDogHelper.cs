@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerDogHelper : MonoBehaviour
 {
     public Rigidbody2D rb2d;
     public HeroHealth playerHealth; //needs to be set in editor
     public GameObject spaceship;
+    public Text dogsObtainedText = null;
     public List<SlugDog> dogChain = new List<SlugDog>();
     //                          ^
     // HA get it because that's the name of the game
@@ -23,7 +25,7 @@ public class PlayerDogHelper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        dogsObtainedText.text = "Dogs Obtained: " + GetDogsInPossession();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

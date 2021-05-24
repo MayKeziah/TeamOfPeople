@@ -14,7 +14,7 @@ public class SceneTransitionHelper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.C)) 
+        if(Input.GetKeyDown(KeyCode.M)) 
         {
             if (SceneManager.GetActiveScene().buildIndex + 1 >= SceneManager.sceneCountInBuildSettings) 
             {
