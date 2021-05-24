@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerDogHelper : MonoBehaviour
 {
     public Rigidbody2D rb2d;
+    public HeroHealth playerHealth; //needs to be set in editor
     public GameObject spaceship;
     public List<SlugDog> dogChain = new List<SlugDog>();
     //                          ^
@@ -33,6 +34,11 @@ public class PlayerDogHelper : MonoBehaviour
 
     void TouchSpaceship() 
     {
+        if(dogChain.Count > 0) //need to replenish oxygen
+        {
+            playerHealth.replenishFullHealth();
+        }
+
         // This is a new trip. Reset the # of dogs we saved this trip to 0 before we count more dogs. Total # stays untouched.
         dogsThisTrip = 0;
 

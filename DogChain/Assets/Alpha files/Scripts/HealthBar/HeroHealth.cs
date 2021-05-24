@@ -64,4 +64,26 @@ public class HeroHealth : MonoBehaviour
      {
         if(originalHealth != currentHealth) healthBar.SetHealth(currentHealth);
      }
+
+    //this function will restore health/oxygen by the amount given.
+    //if the amount given + the current amount is greater than the
+    //max health, then the health will cap at the max amount
+    public void replenishHealth(int amountToGive)
+    {
+        if(amountToGive + currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        else
+        {
+            currentHealth += amountToGive;
+        }
+    }
+
+    //this function will automatically max out the current health
+    //of the player
+    public void replenishFullHealth()
+    {
+        currentHealth = maxHealth;
+    }
 }

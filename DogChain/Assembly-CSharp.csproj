@@ -69,14 +69,14 @@
     <Compile Include="Assets\Playtest files\Scripts\PlayerMoveWithOxygen\PlayerController.cs" />
     <Compile Include="Assets\Alpha files\Scripts\PlayerMovementController.cs" />
     <Compile Include="Assets\Alpha files\Scripts\AlphaFrictionZone.cs" />
-    <Compile Include="Assets\Alpha files\Scripts\AlphaWallController.cs" />
+    <Compile Include="Assets\Alpha files\Scripts\Doors and Walls\AlphaWallController.cs" />
     <Compile Include="Assets\Alpha files\Scripts\WorldCamera\CameraSupport.cs" />
     <Compile Include="Assets\Alpha files\Scripts\GenerateWalls\GenerateWalls.cs" />
     <Compile Include="Assets\Alpha files\Scripts\SceneTransition\NextSceneButton.cs" />
     <Compile Include="Assets\Alpha files\Scripts\DogManagement\PlayerDogHelper.cs" />
     <Compile Include="Assets\Alpha files\Scripts\DogManagement\SlugDog.cs" />
     <Compile Include="Assets\Alpha files\Scripts\SceneTransition\SceneTransitionHelper.cs" />
-    <Compile Include="Assets\Alpha files\Scripts\DoorBehavior.cs" />
+    <Compile Include="Assets\Alpha files\Scripts\Doors and Walls\DoorBehavior.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

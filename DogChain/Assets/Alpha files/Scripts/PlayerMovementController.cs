@@ -7,6 +7,8 @@ public class PlayerMovementController : MonoBehaviour
 {
     public Camera mainCam; //this should be set to the main camera of the scene
 
+    public HeroHealth health; //this needs to be set in the editor
+
     public float accelerationSpeed = 10f; //this is the rate at which the player accelerates
 
     private Vector3 velocity;
@@ -26,10 +28,13 @@ public class PlayerMovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 mousePos = GetMouseWorldPosition();
-        if (Input.GetMouseButton(0))
+        if (health.currentHealth > 0) //player only has control if alive
         {
-            AcceleratePlayer(mousePos);
+            Vector3 mousePos = GetMouseWorldPosition();
+            if (Input.GetMouseButton(0))
+            {
+                AcceleratePlayer(mousePos);
+            }
         }
         MovePlayer();
         wallThisFrame = false;
