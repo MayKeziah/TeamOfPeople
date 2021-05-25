@@ -1,40 +1,201 @@
 public Vector2[][] Perm1 = {
 new Vector2[]{
-new Vector2(-1.735294f, -9.5f)
+new Vector2(-7.735294f, -9.5f)
 , 
-new Vector2(-1.735294f, -8.5f)
+new Vector2(-7.735294f, -8.5f)
 , 
-new Vector2(-1.735294f, -7.5f)
+new Vector2(-7.735294f, -7.5f)
 , 
-new Vector2(-1.735294f, -6.5f)
+new Vector2(-7.735294f, -6.5f)
 , 
-new Vector2(-1.735294f, -5.5f)
+new Vector2(-7.735294f, -5.5f)
 , 
-new Vector2(-1.735294f, -4.5f)
+new Vector2(-7.735294f, -4.5f)
 , 
-new Vector2(-1.735294f, -3.5f)
+new Vector2(-7.735294f, -3.5f)
 , 
-new Vector2(-1.735294f, -2.5f)
+new Vector2(-7.735294f, -2.5f)
 , 
-new Vector2(-1.735294f, -1.5f)
+new Vector2(-7.735294f, -1.5f)
 , 
-new Vector2(-1.735294f, -0.5f)
+new Vector2(-7.735294f, -0.5f)
 , 
-new Vector2(-1.735294f, 0.5f)
+new Vector2(-7.735294f, 0.5f)
 , 
-new Vector2(-1.735294f, 1.5f)
+new Vector2(-7.735294f, 1.5f)
 , 
-new Vector2(-1.735294f, 2.5f)
+new Vector2(-7.735294f, 2.5f)
 , 
-new Vector2(-1.735294f, 3.5f)
+new Vector2(-7.735294f, 3.5f)
 , 
-new Vector2(-1.735294f, 4.5f)
+new Vector2(-7.735294f, 4.5f)
 , 
-new Vector2(-1.735294f, 5.5f)
+new Vector2(-7.735294f, 5.5f)
 , 
-new Vector2(-1.735294f, 6.5f)
+new Vector2(-7.735294f, 6.5f)
 , 
-new Vector2(-1.735294f, 7.5f)
+new Vector2(-7.735294f, 7.5f)
 , 
-new Vector2(-1.735294f, 8.5f)
+new Vector2(-7.735294f, 8.5f)
+}
+, 
+new Vector2[]{
+new Vector2(2.264706f, -9.5f)
+, 
+new Vector2(2.264706f, -8.5f)
+, 
+new Vector2(2.264706f, -7.5f)
+, 
+new Vector2(2.264706f, -6.5f)
+, 
+new Vector2(2.264706f, -5.5f)
+, 
+new Vector2(2.264706f, -4.5f)
+, 
+new Vector2(2.264706f, -3.5f)
+, 
+new Vector2(2.264706f, -2.5f)
+, 
+new Vector2(2.264706f, -1.5f)
+, 
+new Vector2(2.264706f, -0.5f)
+, 
+new Vector2(2.264706f, 0.5f)
+, 
+new Vector2(2.264706f, 1.5f)
+, 
+new Vector2(2.264706f, 2.5f)
+, 
+new Vector2(2.264706f, 3.5f)
+, 
+new Vector2(2.264706f, 4.5f)
+, 
+new Vector2(2.264706f, 5.5f)
+, 
+new Vector2(2.264706f, 6.5f)
+, 
+new Vector2(2.264706f, 7.5f)
+, 
+new Vector2(2.264706f, 8.5f)
+}
+, 
+new Vector2[]{
+new Vector2(7.264706f, -9.5f)
+, 
+new Vector2(7.264706f, -8.5f)
+, 
+new Vector2(7.264706f, -7.5f)
+, 
+new Vector2(7.264706f, -6.5f)
+, 
+new Vector2(7.264706f, -5.5f)
+, 
+new Vector2(7.264706f, -4.5f)
+, 
+new Vector2(7.264706f, -3.5f)
+, 
+new Vector2(7.264706f, -2.5f)
+, 
+new Vector2(7.264706f, -1.5f)
+, 
+new Vector2(7.264706f, -0.5f)
+, 
+new Vector2(7.264706f, 0.5f)
+, 
+new Vector2(7.264706f, 1.5f)
+, 
+new Vector2(7.264706f, 2.5f)
+, 
+new Vector2(7.264706f, 3.5f)
+, 
+new Vector2(7.264706f, 4.5f)
+, 
+new Vector2(7.264706f, 5.5f)
+, 
+new Vector2(7.264706f, 6.5f)
+, 
+new Vector2(7.264706f, 7.5f)
+, 
+new Vector2(7.264706f, 8.5f)
+}
+, 
+new Vector2[]{
+new Vector2(-15.73529f, -9.5f)
+, 
+new Vector2(-15.73529f, -8.5f)
+, 
+new Vector2(-15.73529f, -7.5f)
+, 
+new Vector2(-15.73529f, -6.5f)
+, 
+new Vector2(-15.73529f, -5.5f)
+, 
+new Vector2(-15.73529f, -4.5f)
+, 
+new Vector2(-15.73529f, -3.5f)
+, 
+new Vector2(-15.73529f, -2.5f)
+, 
+new Vector2(-15.73529f, -1.5f)
+, 
+new Vector2(-15.73529f, -0.5f)
+, 
+new Vector2(-15.73529f, 0.5f)
+, 
+new Vector2(-15.73529f, 1.5f)
+, 
+new Vector2(-15.73529f, 2.5f)
+, 
+new Vector2(-15.73529f, 3.5f)
+, 
+new Vector2(-15.73529f, 4.5f)
+, 
+new Vector2(-15.73529f, 5.5f)
+, 
+new Vector2(-15.73529f, 6.5f)
+, 
+new Vector2(-15.73529f, 7.5f)
+, 
+new Vector2(-15.73529f, 8.5f)
+}
+, 
+new Vector2[]{
+new Vector2(-15.73529f, -9.5f)
+, 
+new Vector2(-15.73529f, -8.5f)
+, 
+new Vector2(-15.73529f, -7.5f)
+, 
+new Vector2(-15.73529f, -6.5f)
+, 
+new Vector2(-15.73529f, -5.5f)
+, 
+new Vector2(-15.73529f, -4.5f)
+, 
+new Vector2(-15.73529f, -3.5f)
+, 
+new Vector2(-15.73529f, -2.5f)
+, 
+new Vector2(-15.73529f, -1.5f)
+, 
+new Vector2(-15.73529f, -0.5f)
+, 
+new Vector2(-15.73529f, 0.5f)
+, 
+new Vector2(-15.73529f, 1.5f)
+, 
+new Vector2(-15.73529f, 2.5f)
+, 
+new Vector2(-15.73529f, 3.5f)
+, 
+new Vector2(-15.73529f, 4.5f)
+, 
+new Vector2(-15.73529f, 5.5f)
+, 
+new Vector2(-15.73529f, 6.5f)
+, 
+new Vector2(-15.73529f, 7.5f)
+, 
+new Vector2(-15.73529f, 8.5f)
+}
 };

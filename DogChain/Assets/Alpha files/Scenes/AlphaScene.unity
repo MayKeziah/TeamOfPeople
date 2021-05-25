@@ -902,7 +902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testingMode: 0
-  mapFieldsLength: 1
+  numOfWalls: 0
   xMin: 0
   xMax: 0
   yMin: 0

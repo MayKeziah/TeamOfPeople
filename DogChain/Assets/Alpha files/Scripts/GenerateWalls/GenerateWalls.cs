@@ -84,7 +84,7 @@ public class GenerateWalls : MonoBehaviour
             map.serialize(TempWalls, tDest);
         }
         if(testingMode) generateWalls();
-        Debug.Log("Length of Permanent: " + PermanentWalls.Count);
+        // Debug.Log("Length of Permanent: " + PermanentWalls.Count);
         // to test different configurations:
         //  run the scene, click GameController, select "TestingMode".
         //  Now you can adjust the wall dimensions, perimeter dimensions, & the position of the perimeter. 
@@ -118,7 +118,7 @@ public class GenerateWalls : MonoBehaviour
 
     private void starterWalls()
     {
-        for (int i = 0; i < numOfWalls; ++i)
+        for (int i = PermanentWalls.Count; i < numOfWalls; ++i)
         {
             newStandardWall(permanent);
         }

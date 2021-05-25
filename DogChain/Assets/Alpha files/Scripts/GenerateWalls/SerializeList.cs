@@ -27,7 +27,7 @@ public class SerializeList
              if (counter != wall.Count - 1) writetext.WriteLine(", ");
              counter++;
           }
-          // writetext.WriteLine("}");
+          writetext.WriteLine("}");
           if (wallCount != list.Count - 1) writetext.WriteLine(", ");
           wallCount++;
         }
