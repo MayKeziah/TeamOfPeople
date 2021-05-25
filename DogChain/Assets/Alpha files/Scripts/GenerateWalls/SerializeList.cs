@@ -13,11 +13,11 @@ public class SerializeList
   {
     using(StreamWriter writetext = new StreamWriter(destination))
     {
-        writetext.WriteLine("public Vector2[] Perm1 = {");
+        writetext.WriteLine("public Vector2[][] Perm1 = {");
         int wallCount = 0;
         foreach(List<GameObject> wall in list)
         {
-          // writetext.WriteLine("{");
+          writetext.WriteLine("new Vector2[]{");
           int counter = 0;
           foreach(GameObject brick in wall)
           {
