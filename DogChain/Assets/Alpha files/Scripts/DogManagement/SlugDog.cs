@@ -22,6 +22,7 @@ public class SlugDog : MonoBehaviour
     public float attractRadius = 2f;
     public float followRadius = 8f;
     public float spinDuration = 0.5f;
+    public float spinSpeed = 1f;
     private float spinTime;
     private bool isSpinning = false;
 
@@ -41,6 +42,7 @@ public class SlugDog : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         originalColor = GetComponent<SpriteRenderer>().color;
+        GetComponent<SpriteRenderer>().color = Color.grey;
         spaceship = thePlayer.spaceship;
 
         if (followRadius <= attractRadius) {
@@ -117,7 +119,8 @@ public class SlugDog : MonoBehaviour
 
                 if (isChasing) 
                 {
-                    transform.position = Vector2.MoveTowards(transform.position, thePlayer.transform.position, Time.deltaTime * moveSpeed);
+                    //transform.position = Vector2.MoveTowards(transform.position, thePlayer.transform.position, Time.deltaTime * moveSpeed);
+                    transform.position = Vector2.MoveTowards(transform.position, Vector2.Lerp(transform.position, thePlayer.transform.position, 0.5f), Time.deltaTime * moveSpeed);
                 }
                 
             }
@@ -158,7 +161,8 @@ public class SlugDog : MonoBehaviour
 
                 if (isChasing) 
                 {
-                    transform.position = Vector2.MoveTowards(transform.position, followMe.transform.position, Time.deltaTime * moveSpeed);
+                    //transform.position = Vector2.MoveTowards(transform.position, followMe.transform.position, Time.deltaTime * moveSpeed);
+                    transform.position = Vector2.MoveTowards(transform.position, Vector2.Lerp(transform.position, followMe.transform.position, 0.5f), Time.deltaTime * moveSpeed);
                 }
                 
             }
@@ -180,14 +184,14 @@ public class SlugDog : MonoBehaviour
         if (!isSpinning) {
             isSpinning = true;
             spinTime = Time.time + spinDuration;
-            // Reset the color of this dog, in case it has previously gotten lost and turned red (see RemoveFromChain() below)
+            // Dog becomes its natural "green" color as it follows you.
             GetComponent<SpriteRenderer>().color = originalColor;
         }
 
         // speen
         if (isSpinning && Time.time < spinTime)
         {
-            transform.Rotate(0f, 0f, 1f, Space.Self);
+            transform.Rotate(0f, 0f, spinSpeed, Space.Self);
         }
         else if (isSpinning)
         {
@@ -223,8 +227,8 @@ public class SlugDog : MonoBehaviour
 
     void RemoveFromChain() 
     {
-        // Change color to red as a visual cue for the player
-        GetComponent<SpriteRenderer>().color = Color.red;
+        // Change color to grey as a visual cue for the player that they have lost the dog
+        GetComponent<SpriteRenderer>().color = Color.grey;
 
         // The dog is removed from the dogChain/List and reverts to an inactive state.
         thePlayer.dogChain.Remove(this);
