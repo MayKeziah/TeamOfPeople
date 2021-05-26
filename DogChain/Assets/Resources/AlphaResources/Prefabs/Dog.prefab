@@ -99,11 +99,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thePlayer: {fileID: 0}
   rb2d: {fileID: 0}
-  moveSpeed: 15
-  reactionSpeed: 0.25
-  attractRadius: 5
+  moveSpeed: 12
+  reactionSpeed: 0
+  attractRadius: 4
   followRadius: 45
   spinDuration: 1
+  spinSpeed: 4
 --- !u!50 &9067514811566645706
 Rigidbody2D:
   serializedVersion: 4
