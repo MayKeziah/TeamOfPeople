@@ -233,6 +233,15 @@ public class PlayerMovementController : MonoBehaviour
                 transform.position = newpos;
             }
         }
+        if (collision.gameObject.GetComponent<OxygenPickup>() != null)
+        {
+            OxygenPickup pickup = collision.gameObject.GetComponent<OxygenPickup>();
+            if (pickup.isActive)
+            {
+                health.replenishHealth(pickup.OxygenToRestore);
+                pickup.deactivate();
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
