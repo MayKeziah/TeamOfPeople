@@ -19,6 +19,8 @@ public class PlayerMovementController : MonoBehaviour
 
     private bool wallThisFrame = false; //boolean for multiple wall collision prevention
 
+    private bool isFreezed = false; //whether or not to freeze player movement
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,11 @@ public class PlayerMovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isFreezed)
+        {
+            wallThisFrame = false;
+            return;
+        }
         if (health.currentHealth > 0) //player only has control if alive
         {
             Vector3 mousePos = GetMouseWorldPosition();
@@ -106,6 +113,13 @@ public class PlayerMovementController : MonoBehaviour
             //Debug.Log("not null");
             currentZone = collision.gameObject.GetComponent<AlphaFrictionZone>();
             inFrictionZone = true;
+        }
+        if(collision.gameObject.GetComponent<SpaceshipTransition>() != null)
+        {
+            if (gameObject.GetComponent<PlayerDogHelper>().dogChain.Count != 0)
+            {
+                collision.gameObject.GetComponent<SpaceshipTransition>().activate();
+            }
         }
         if (collision.gameObject.GetComponent<AlphaWallController>() != null)
         {
@@ -252,4 +266,13 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
+    //functions for freezing and unfreezing the player
+    public void Freeze()
+    {
+        isFreezed = true;
+    }
+    public void Unfreeze()
+    {
+        isFreezed = false;
+    }
 }

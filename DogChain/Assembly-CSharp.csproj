@@ -82,6 +82,7 @@
     <Compile Include="Assets\Alpha files\Scripts\GenerateWalls\StoredMaps.cs" />
     <Compile Include="Assets\Alpha files\Scripts\GenerateWalls\SerializeList.cs" />
     <Compile Include="Assets\Alpha files\Scripts\Pickups\OxygenPickup.cs" />
+    <Compile Include="Assets\Alpha files\Scripts\SpaceshipTransition.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
