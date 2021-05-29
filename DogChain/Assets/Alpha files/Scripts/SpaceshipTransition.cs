@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpaceshipTransition : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class SpaceshipTransition : MonoBehaviour
     public Camera mainCam;
     public PlayerMovementController player;
     public GameObject obscuringCube; //a little vague, this is the object over the camera which is used for the fadeout
+    public List<OxygenPickup> pickupsToRefresh;
+
+    //references not set in editor
+    private Text dateText;
 
     //current state
     private transitionState currentState = transitionState.Waiting;
@@ -22,6 +27,10 @@ public class SpaceshipTransition : MonoBehaviour
 
     //color used for fadein/out
     private Color fadeColor = Color.black;
+    private Color textFadeColor = Color.white;
+
+    //number of trips made to the ship
+    private int numberOfTrips = 0;
 
 
     //enum for FSM
@@ -38,6 +47,9 @@ public class SpaceshipTransition : MonoBehaviour
     void Start()
     {
         fadeColor.a = 0f;
+        textFadeColor.a = 0f;
+        //assumes that the text is under canvas and under obscuring object, and first child in each case
+        dateText = obscuringCube.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -76,8 +88,9 @@ public class SpaceshipTransition : MonoBehaviour
         if(currentFadeFrame < fadeFrames)
         {
             currentFadeFrame++;
-            fadeColor.a = ((float)currentFadeFrame) / ((float)fadeFrames);
+            textFadeColor.a = fadeColor.a = ((float)currentFadeFrame) / ((float)fadeFrames);
             obscuringCube.GetComponent<SpriteRenderer>().color = fadeColor;
+            dateText.color = textFadeColor;
         }
         else
         {
@@ -90,7 +103,10 @@ public class SpaceshipTransition : MonoBehaviour
     //faded out, like respawning oxygen pickups or spawning friction zones
     private void activateFadedActions()
     {
-
+        for(int i = 0; i < pickupsToRefresh.Count; i++) //foreach pickup in the list
+        {
+            pickupsToRefresh[i].activate(); //reactivate pickup
+        }
     }
 
     private void doFadeIn()
@@ -98,8 +114,9 @@ public class SpaceshipTransition : MonoBehaviour
         if (currentFadeFrame > 0)
         {
             currentFadeFrame--;
-            fadeColor.a = ((float)currentFadeFrame) / ((float)fadeFrames);
+            textFadeColor.a = fadeColor.a = ((float)currentFadeFrame) / ((float)fadeFrames);
             obscuringCube.GetComponent<SpriteRenderer>().color = fadeColor;
+            dateText.color = textFadeColor;
         }
         else
         {
@@ -115,6 +132,8 @@ public class SpaceshipTransition : MonoBehaviour
     {
         if(currentState == transitionState.Waiting)
         {
+            numberOfTrips++;
+            dateText.text = "Day " + numberOfTrips;
             currentState = transitionState.PauseForDogs;
             currentWaitTime = 0f;
             player.Freeze();
