@@ -101,8 +101,8 @@ MonoBehaviour:
   rb2d: {fileID: 0}
   moveSpeed: 12
   reactionSpeed: 0
-  attractRadius: 4
-  followRadius: 45
+  attractRadius: 4.5
+  followRadius: 10
   spinDuration: 1
   spinSpeed: 4
 --- !u!50 &9067514811566645706
@@ -125,7 +125,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &2264459441928319336
 BoxCollider2D:
   m_ObjectHideFlags: 0
