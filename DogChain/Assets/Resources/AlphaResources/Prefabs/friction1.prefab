@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6516919976278022345}
   - component: {fileID: 7581061290147973901}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: friction1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

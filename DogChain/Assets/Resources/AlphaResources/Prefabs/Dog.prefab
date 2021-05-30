@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5212423108805174089}
   - component: {fileID: 9067514811566645706}
   - component: {fileID: 2264459441928319336}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Dog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1072813647370447865}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

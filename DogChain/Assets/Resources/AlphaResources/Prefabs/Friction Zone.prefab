@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4141131199116068401}
   - component: {fileID: 524833131270782882}
   - component: {fileID: 4090403608576260367}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Friction Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
