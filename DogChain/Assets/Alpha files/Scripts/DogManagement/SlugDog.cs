@@ -32,6 +32,7 @@ public class SlugDog : MonoBehaviour
     public enum dogState 
     {
         Inactive,
+        EnteringChain,
         Chained,
         Spin,
         Spaceship
@@ -58,6 +59,9 @@ public class SlugDog : MonoBehaviour
         {
             case dogState.Inactive:
                 UpdateInactive();
+                break;
+            case dogState.EnteringChain:
+                GetIntoChain();
                 break;
             case dogState.Chained:
                 Follow();
@@ -95,6 +99,34 @@ public class SlugDog : MonoBehaviour
             thePlayer.dogChain.Add(this);
 
             ChangeState(dogState.Spin);
+        }
+    }
+
+    void GetIntoChain()
+    {
+        if (followPlayer) //if we're the first dog we're guaranteed to be within the follow radius
+        {
+            currentState = dogState.Chained;
+        }
+        else
+        {
+            if(Vector2.Distance(followMe.transform.position, transform.position) < followRadius) //within the radius now, and can follow normally
+            {
+                currentState = dogState.Chained;
+            }
+            else //otherwise move closer
+            {
+                Vector2 otherPos = Vector2.MoveTowards(transform.position, Vector2.Lerp(transform.position, followMe.transform.position, 0.5f), Time.deltaTime * moveSpeed);
+                if (transform.position.x > otherPos.x) // moving left
+                {
+                    dogLeftRight.FaceLeft();
+                }
+                else if (transform.position.x < otherPos.x) // moving right
+                {
+                    dogLeftRight.FaceRight();
+                }
+                transform.position = otherPos;
+            }
         }
     }
 
@@ -218,7 +250,7 @@ public class SlugDog : MonoBehaviour
             // Make sure dog's rotation is reset to (0, 0, 0)
             transform.rotation = Quaternion.identity;
 
-            ChangeState(dogState.Chained);
+            ChangeState(dogState.EnteringChain);
         }
         
     }
