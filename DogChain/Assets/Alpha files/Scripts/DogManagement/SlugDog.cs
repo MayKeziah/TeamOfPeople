@@ -9,6 +9,7 @@ public class SlugDog : MonoBehaviour
     // Note: player object MUST have a RigidBody2D
     private GameObject spaceship;
     public Rigidbody2D rb2d;
+    public ObjectFacingLeftRight dogLeftRight;
 
     private bool followPlayer = false;
     // If another dog is already present in the chain, a new dog should not follow the player but rather the other dog instead.
@@ -119,8 +120,16 @@ public class SlugDog : MonoBehaviour
 
                 if (isChasing) 
                 {
-                    //transform.position = Vector2.MoveTowards(transform.position, thePlayer.transform.position, Time.deltaTime * moveSpeed);
-                    transform.position = Vector2.MoveTowards(transform.position, Vector2.Lerp(transform.position, thePlayer.transform.position, 0.5f), Time.deltaTime * moveSpeed);
+                    Vector2 otherPos = Vector2.MoveTowards(transform.position, Vector2.Lerp(transform.position, thePlayer.transform.position, 0.5f), Time.deltaTime * moveSpeed);
+                    if (transform.position.x > otherPos.x) // moving left
+                    {
+                        dogLeftRight.FaceLeft();
+                    }
+                    else if (transform.position.x < otherPos.x) // moving right
+                    {
+                        dogLeftRight.FaceRight();
+                    }
+                    transform.position = otherPos;
                 }
                 
             }
@@ -161,8 +170,16 @@ public class SlugDog : MonoBehaviour
 
                 if (isChasing) 
                 {
-                    //transform.position = Vector2.MoveTowards(transform.position, followMe.transform.position, Time.deltaTime * moveSpeed);
-                    transform.position = Vector2.MoveTowards(transform.position, Vector2.Lerp(transform.position, followMe.transform.position, 0.5f), Time.deltaTime * moveSpeed);
+                    Vector2 otherPos = Vector2.MoveTowards(transform.position, Vector2.Lerp(transform.position, followMe.transform.position, 0.5f), Time.deltaTime * moveSpeed);
+                    if (transform.position.x > otherPos.x) // moving left
+                    {
+                        dogLeftRight.FaceLeft();
+                    }
+                    else if (transform.position.x < otherPos.x) // moving right
+                    {
+                        dogLeftRight.FaceRight();
+                    }
+                    transform.position = otherPos;
                 }
                 
             }
