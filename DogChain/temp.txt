@@ -1,2 +1,23 @@
 public Vector2[][] Perm1 = {
+new Vector2[]{
+new Vector2(38.39542f, 53.5f)
+, 
+new Vector2(37.39542f, 53.5f)
+, 
+new Vector2(36.39542f, 53.5f)
+, 
+new Vector2(35.39542f, 53.5f)
+, 
+new Vector2(34.39542f, 53.5f)
+, 
+new Vector2(33.39542f, 53.5f)
+, 
+new Vector2(32.39542f, 53.5f)
+, 
+new Vector2(31.39542f, 53.5f)
+, 
+new Vector2(30.39542f, 53.5f)
+, 
+new Vector2(29.39542f, 53.5f)
+}
 };
