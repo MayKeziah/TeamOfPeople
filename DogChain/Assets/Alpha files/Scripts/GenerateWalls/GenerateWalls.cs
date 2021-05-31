@@ -21,7 +21,13 @@ public class GenerateWalls : MonoBehaviour
     private List<List<GameObject>> PermanentWalls = new List<List<GameObject>>();
     private List<List<GameObject>> TempWalls = new List<List<GameObject>>();
     private List<List<GameObject>> Boundaries = new List<List<GameObject>>();
-    private List<GameObject> StoredBricks = new List<GameObject>();
+
+    // Stored rooms and doors
+    private List<List<GameObject>> Walls = new List<List<GameObject>>();
+    private List<List<GameObject>> Doors = new List<List<GameObject>>();
+
+
+
 
 
     // inner map
@@ -29,7 +35,7 @@ public class GenerateWalls : MonoBehaviour
     public List<int> xCoords = new List<int>();
     public List<int> yCoords = new List<int>();
     public List<Direction> directions = new List<Direction>();
-    public List<string> types = new List<string>();
+    public List<Material> types = new List<Material>();
 
 
     // Brick-grid dimensions
@@ -64,6 +70,13 @@ public class GenerateWalls : MonoBehaviour
     private const string pDest = "permanent.txt";
     private const string tDest = "temp.txt";
 
+    // Brick Types
+    public enum Material
+    {
+        Wall,
+        Door
+    }
+
 
     // calculates the dimensions of the brick and the main camera, creates a boundary and map of walls
     void Start()
@@ -95,25 +108,30 @@ public class GenerateWalls : MonoBehaviour
 
     private void deserialize()
     {
-        foreach (Vector2[] wall in storedMaps.Perm1)
-        {
-            List<GameObject> current = new List<GameObject>();
-            for (int i = 0; i < wall.Length; ++i)
+        foreach (Vector2[][] room in storedMaps.getPermanent()){
+            foreach (Vector2[] wall in room)
             {
-            current.Add(newBrick(wall[i].x, wall[i].y, permanent));
+                List<GameObject> current = new List<GameObject>();
+                for (int i = 0; i < wall.Length; ++i)
+                {
+                    current.Add(newBrick(wall[i].x, wall[i].y, permanent));
+                }
+                Walls.Add(current);
             }
-            PermanentWalls.Add(current);
         }
-
-        foreach (Vector2[] wall in storedMaps.Temp1)
-        {
-            List<GameObject> current = new List<GameObject>();
-            for (int i = 0; i < wall.Length; ++i)
+        
+        foreach (Vector2[][] room in storedMaps.getTemporary()){
+            foreach (Vector2[] wall in room)
             {
-            current.Add(newBrick(wall[i].x, wall[i].y, temporary));
+                List<GameObject> current = new List<GameObject>();
+                for (int i = 0; i < wall.Length; ++i)
+                {
+                current.Add(newBrick(wall[i].x, wall[i].y, temporary));
+                }
+                Doors.Add(current);
             }
-            TempWalls.Add(current);
         }
+            
     }
 
     private void starterWalls()
@@ -135,12 +153,12 @@ public class GenerateWalls : MonoBehaviour
             newWorldDimensions();
             updateWalls();
         }
-        createBoundaries(0, worldWidthInBricks - 1, 0, worldHeightInBricks - 1);
+        // createBoundaries(0, worldWidthInBricks - 1, 0, worldHeightInBricks - 1);
     }
 
     void newStandardWall(string type)
     {
-        addInnerWall(worldHeightInBricks - 1, 2, 0, Direction.Up, type);
+        addInnerWall(10, 0, 0, Direction.Up, type);
     }
     void addInnerWall(int brickCount, int fromX, int fromY, Direction to, string type)
     {
@@ -148,15 +166,21 @@ public class GenerateWalls : MonoBehaviour
         xCoords.Add(fromX);
         yCoords.Add(fromY);
         directions.Add(to);
-        types.Add(type);
+        if(type.Equals(permanent)){
+            types.Add(Material.Wall);
+        }
+        else if(type.Equals(temporary)){
+            types.Add(Material.Door);
+        }
+        
     }
 
     private void createWalls()
     {
         for (int i = 0; i < lengths.Count; ++i)
         {
-            if(types[i].Equals(permanent)) PermanentWalls.Add(newWall(lengths[i], xCoords[i], yCoords[i], directions[i], types[i]));
-            else if(types[i].Equals(temporary)) TempWalls.Add(newWall(lengths[i], xCoords[i], yCoords[i], directions[i], types[i]));
+            if(types[i] == Material.Wall) PermanentWalls.Add(newWall(lengths[i], xCoords[i], yCoords[i], directions[i], permanent));
+            else if(types[i] == Material.Door) TempWalls.Add(newWall(lengths[i], xCoords[i], yCoords[i], directions[i], temporary));
         }
     }
 
