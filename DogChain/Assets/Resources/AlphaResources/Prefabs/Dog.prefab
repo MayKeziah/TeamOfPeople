@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f95f85acd28ec9e44a927a7652807fe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flipSpriteAutomatically: 0
   leftFacingSprite: {fileID: 21300000, guid: 1858fa5bed6204044baf02b518430554, type: 3}
   rightFacingSprite: {fileID: 21300000, guid: eb0291bbdc4ce424aac5d787caeafce0, type: 3}
 --- !u!50 &9067514811566645706

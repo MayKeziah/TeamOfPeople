@@ -20,6 +20,7 @@ public class PlayerMovementController : MonoBehaviour
     private bool wallThisFrame = false; //boolean for multiple wall collision prevention
 
     private bool isFreezed = false; //whether or not to freeze player movement
+    public ObjectFacingLeftRight playerLeftRight;
 
     // Start is called before the first frame update
     void Start()
@@ -74,6 +75,17 @@ public class PlayerMovementController : MonoBehaviour
     //moves the player according to velocity and slows down velocity slightly
     private void MovePlayer()
     {
+        // begin area where Talon flippa the sprite
+        if (velocity.x < 0) // left
+        {
+            playerLeftRight.FaceLeft();
+        }
+        else if (velocity.x > 0)// right
+        {
+            playerLeftRight.FaceRight();
+        }
+        // end area where Talon flippa the sprite
+
         Vector3 newPos = transform.position;
         newPos += velocity * Time.deltaTime;
         transform.position = newPos;
