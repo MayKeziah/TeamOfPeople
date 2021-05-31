@@ -21,6 +21,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private bool isFreezed = false; //whether or not to freeze player movement
     public ObjectFacingLeftRight playerLeftRight;
+    public GameObject oxygenPuff;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +43,9 @@ public class PlayerMovementController : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
                 AcceleratePlayer(mousePos);
+
+                // spawn oxygen puffs as an indicator
+                GameObject puff = Instantiate(oxygenPuff, transform.position, Quaternion.identity);
             }
         }
         MovePlayer();

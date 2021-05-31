@@ -2291,6 +2291,7 @@ MonoBehaviour:
   health: {fileID: 1072149216}
   accelerationSpeed: 10
   playerLeftRight: {fileID: 1908696488}
+  oxygenPuff: {fileID: 3165274962149101404, guid: a8c1252e0a3e8614797db8e793956b75, type: 3}
 --- !u!114 &1908696485
 MonoBehaviour:
   m_ObjectHideFlags: 0
