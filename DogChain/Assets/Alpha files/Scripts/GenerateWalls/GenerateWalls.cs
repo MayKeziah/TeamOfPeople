@@ -339,7 +339,6 @@ public class GenerateWalls : MonoBehaviour
 
     public void destroyDoor()
     {
-        Debug.Log(Doors.Count);
         if (Doors.Count == 0) return;
         foreach (GameObject Brick in Doors[0])
         {
