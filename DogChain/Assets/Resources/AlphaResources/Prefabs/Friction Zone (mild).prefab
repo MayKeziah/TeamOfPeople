@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5721936230337617759
+--- !u!1 &1176039119340064050
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,24 +8,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4141131199116068401}
-  - component: {fileID: 524833131270782882}
-  - component: {fileID: 1248941487038658565}
-  - component: {fileID: 1414722402878114589}
+  - component: {fileID: 7368459726588580956}
+  - component: {fileID: 6373388443951328719}
+  - component: {fileID: 5651848603680090728}
+  - component: {fileID: 5519264086708853104}
   m_Layer: 11
-  m_Name: Friction Zone
+  m_Name: Friction Zone (mild)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4141131199116068401
+--- !u!4 &7368459726588580956
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5721936230337617759}
+  m_GameObject: {fileID: 1176039119340064050}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 25, y: 25, z: 1}
@@ -33,13 +33,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &524833131270782882
+--- !u!212 &6373388443951328719
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5721936230337617759}
+  m_GameObject: {fileID: 1176039119340064050}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3faa030a904b03e4fa85f32029bcb7d0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cea5662e17846e74db1f7bb6c3c9d5f2, type: 3}
   m_Color: {r: 1, g: 0.572327, b: 0.572327, a: 0.45882353}
   m_FlipX: 0
   m_FlipY: 0
@@ -84,26 +84,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1248941487038658565
+--- !u!114 &5651848603680090728
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5721936230337617759}
+  m_GameObject: {fileID: 1176039119340064050}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aad9054b90185aa45814ed80c3fb10b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   frictionModifier: 0.5
---- !u!61 &1414722402878114589
+--- !u!61 &5519264086708853104
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5721936230337617759}
+  m_GameObject: {fileID: 1176039119340064050}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}

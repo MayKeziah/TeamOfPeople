@@ -10,6 +10,8 @@ public class SpaceshipTransition : MonoBehaviour
     public PlayerMovementController player;
     public GameObject obscuringCube; //a little vague, this is the object over the camera which is used for the fadeout
     public List<OxygenPickup> pickupsToRefresh;
+    //friction zones in order of appearance (1-5 trips)
+    public List<GameObject> frictionZones;
 
     //references not set in editor
     private Text dateText;
@@ -106,6 +108,10 @@ public class SpaceshipTransition : MonoBehaviour
         for(int i = 0; i < pickupsToRefresh.Count; i++) //foreach pickup in the list
         {
             pickupsToRefresh[i].activate(); //reactivate pickup
+        }
+        if(numberOfTrips - 1 < frictionZones.Count) //activates friction zones as you go
+        {
+            frictionZones[numberOfTrips - 1].SetActive(true);
         }
     }
 
