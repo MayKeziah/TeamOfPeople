@@ -16,14 +16,14 @@ public class SceneTransitionHelper : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.M)) 
         {
-            if (SceneManager.GetActiveScene().buildIndex + 1 >= SceneManager.sceneCountInBuildSettings) 
-            {
+            //if (SceneManager.GetActiveScene().buildIndex + 1 >= SceneManager.sceneCountInBuildSettings) 
+            //{
                 SceneManager.LoadScene(0);
-            }
-            else
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            }
+            //}
+            //else
+            //{
+                //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            //}
         }
     }
 
