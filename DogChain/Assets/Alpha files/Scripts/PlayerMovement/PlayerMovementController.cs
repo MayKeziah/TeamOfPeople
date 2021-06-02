@@ -7,6 +7,8 @@ public class PlayerMovementController : MonoBehaviour
 {
     public Camera mainCam; //this should be set to the main camera of the scene
 
+    public AudioSource bounceSource; //this is the audiosource that plays the bounce noise
+
     public HeroHealth health; //this needs to be set in the editor
 
     public float accelerationSpeed = 10f; //this is the rate at which the player accelerates
@@ -192,10 +194,16 @@ public class PlayerMovementController : MonoBehaviour
                         if (cosUR > 0f && cosUL < 0f || cosUR < 0f && cosUL > 0f) //hit the right or left side of the wall
                         {
                             velocity.x = -velocity.x;
+                            bounceSource.time = 0.4f;
+                            bounceSource.Play();
+                            bounceSource.SetScheduledEndTime(AudioSettings.dspTime + 0.6f);
                         }
                         else if (cosUR > 0f && cosUL > 0f || cosUR < 0f && cosUL < 0f) //hit the up or down side of the wall
                         {
                             velocity.y = -velocity.y;
+                            bounceSource.time = 0.4f;
+                            bounceSource.Play();
+                            bounceSource.SetScheduledEndTime(AudioSettings.dspTime + 0.6f);
                         }
                         wallThisFrame = true;
                     }
