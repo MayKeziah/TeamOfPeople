@@ -2007,7 +2007,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1072149214}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2062d6b50c2469449a6ca63f3493b98d, type: 3}
   m_Name: 
@@ -3477,6 +3477,7 @@ GameObject:
   - component: {fileID: 1908696488}
   - component: {fileID: 1908696487}
   - component: {fileID: 1908696486}
+  - component: {fileID: 1908696489}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -3649,6 +3650,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftFacingSprite: {fileID: 21300000, guid: 43e1d8069f8ee4f43b651b94a44bcb9b, type: 3}
   rightFacingSprite: {fileID: 21300000, guid: e3e4f7bf900173c4abcee9eee7221174, type: 3}
+--- !u!114 &1908696489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908696481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da027e09bb19df44fa9312662c476742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rooms: {fileID: 1072149218}
+  dogs: {fileID: 1908696485}
+  dogsToUnlockDoor: 010000000400000006000000090000000c00000011000000
 --- !u!1 &1909655046
 GameObject:
   m_ObjectHideFlags: 0

@@ -53,6 +53,7 @@ public class GenerateWalls : MonoBehaviour
     // Main Camera data
     public CameraSupport world;
 
+    // Dog counter for door unlocking
 
     //
     public StoredMaps storedMaps = new StoredMaps();
@@ -336,7 +337,7 @@ public class GenerateWalls : MonoBehaviour
         return brick;
     }
 
-    private void destroyDoor()
+    public void destroyDoor()
     {
         if (Doors.Count == 0) return;
         foreach (GameObject Brick in Doors[0])
@@ -344,5 +345,6 @@ public class GenerateWalls : MonoBehaviour
             Destroy(Brick);
         }
         Doors.RemoveAt(0);
+        Debug.Log("Door unlocked. Remaining doors: " + Doors.Count);
     }
 }
