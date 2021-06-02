@@ -53,6 +53,7 @@ public class GenerateWalls : MonoBehaviour
     // Main Camera data
     public CameraSupport world;
 
+    // Dog counter for door unlocking
 
     //
     public StoredMaps storedMaps = new StoredMaps();
@@ -91,12 +92,15 @@ public class GenerateWalls : MonoBehaviour
     // Allows realtime testing of wall variables
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P)) 
-        {
-            map.serialize(PermanentWalls, pDest);
-            map.serialize(TempWalls, tDest);
-        }
+        // if(Input.GetKeyDown(KeyCode.P)) 
+        // {
+        //     map.serialize(PermanentWalls, pDest);
+        //     map.serialize(TempWalls, tDest);
+        // }
         if(testingMode) generateWalls();
+        if(Input.GetKeyDown(KeyCode.L)){
+            destroyDoor();
+        }
         // Debug.Log("Length of Permanent: " + PermanentWalls.Count);
         // to test different configurations:
         //  run the scene, click GameController, select "TestingMode".
@@ -331,5 +335,16 @@ public class GenerateWalls : MonoBehaviour
         GameObject brick = Instantiate(Resources.Load("AlphaResources/Prefabs/" + type)) as GameObject;
         brick.transform.position = new Vector3(x, y, wallZ);
         return brick;
+    }
+
+    public void destroyDoor()
+    {
+        if (Doors.Count == 0) return;
+        foreach (GameObject Brick in Doors[0])
+        {
+            Destroy(Brick);
+        }
+        Doors.RemoveAt(0);
+        Debug.Log("Door unlocked. Remaining doors: " + Doors.Count);
     }
 }

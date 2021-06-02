@@ -2518,10 +2518,12 @@ public Vector2[][][] getTemporary()
 {
   Vector2[][][] doors = 
   {
-    TempRoom1, TempRoom3,
+    TempRoom1, 
+    TempRoom3,
     TempRoom7, 
     TempRoom11, 
-    TempRoom16, TempRoom18
+    TempRoom18, 
+    TempRoom16, 
   };
   return doors;
 }
