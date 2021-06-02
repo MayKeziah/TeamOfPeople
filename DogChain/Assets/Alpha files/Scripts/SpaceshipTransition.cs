@@ -15,6 +15,9 @@ public class SpaceshipTransition : MonoBehaviour
 
     //references not set in editor
     private Text dateText;
+    private PlayerDogHelper dogCounter;
+    private const string PlayerName = "Player";
+    private const int numOfDogs = 18; //needs to be set to the amount of dogs in the scene
 
     //current state
     private transitionState currentState = transitionState.Waiting;
@@ -41,13 +44,16 @@ public class SpaceshipTransition : MonoBehaviour
         Waiting, //not currently in a transition state
         PauseForDogs, //short time spent waiting for dogs to reach the ship
         FadeOut, //fade out of seeing stuff
-        FadeIn
+        FadeIn,
+        FinalFadeOut, //fadeout for when all dogs are in
+        Done //final state when player wins
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
+        dogCounter = GameObject.Find(PlayerName).GetComponent<PlayerDogHelper>();
         fadeColor.a = 0f;
         textFadeColor.a = 0f;
         //assumes that the text is under canvas and under obscuring object, and first child in each case
@@ -70,6 +76,13 @@ public class SpaceshipTransition : MonoBehaviour
             case transitionState.FadeIn:
                 doFadeIn();
                 break;
+            case transitionState.FinalFadeOut:
+                doFinalFadeOut();
+                break;
+            case transitionState.Done:
+                break;
+            default:
+                break;
         }
     }
 
@@ -77,9 +90,16 @@ public class SpaceshipTransition : MonoBehaviour
     private void doWaitForDogs()
     {
         currentWaitTime += Time.deltaTime;
-        if(currentWaitTime >= waitUntil)
+        if (currentWaitTime >= waitUntil)
         {
-            currentState = transitionState.FadeOut;
+            if (dogCounter.GetDogsInPossession() >= numOfDogs) //if we're done with the dogs end the game
+            {
+                currentState = transitionState.FinalFadeOut;
+            }
+            else 
+            {
+                currentState = transitionState.FadeOut;
+            }
             currentFadeFrame = 0;
         }
     }
@@ -101,6 +121,21 @@ public class SpaceshipTransition : MonoBehaviour
         }
     }
 
+    private void doFinalFadeOut()
+    {
+        if (currentFadeFrame < fadeFrames)
+        {
+            currentFadeFrame++;
+            fadeColor.a = ((float)currentFadeFrame) / ((float)fadeFrames);
+            obscuringCube.GetComponent<SpriteRenderer>().color = fadeColor;
+        }
+        else
+        {
+            currentState = transitionState.Done;
+            activateEndActions();
+        }
+    }
+
     //this function does everything that needs to be done during the time where the camera is fully
     //faded out, like respawning oxygen pickups or spawning friction zones
     private void activateFadedActions()
@@ -112,6 +147,21 @@ public class SpaceshipTransition : MonoBehaviour
         if(numberOfTrips - 1 < frictionZones.Count) //activates friction zones as you go
         {
             frictionZones[numberOfTrips - 1].SetActive(true);
+        }
+    }
+
+    //sets the final win text based on how many days it took the player to complete it
+    private void activateEndActions()
+    {
+        textFadeColor.a = 1f;
+        dateText.color = textFadeColor;
+        if(numberOfTrips == 1)
+        {
+            dateText.text = "WOWZA! you did that in just one day!? Fantastic job!";
+        }
+        else
+        {
+            dateText.text = "Congratulations! you got all the slugdogs in only " + numberOfTrips + " days!";
         }
     }
 
