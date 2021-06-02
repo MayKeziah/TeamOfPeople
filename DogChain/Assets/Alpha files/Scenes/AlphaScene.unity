@@ -3664,7 +3664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rooms: {fileID: 1072149218}
   dogs: {fileID: 1908696485}
-  dogsToUnlockDoor: 010000000400000006000000090000000c00000011000000
+  dogsToUnlockDoor: 0100000004000000080000000b0000000d0000001000000011000000
 --- !u!1 &1909655046
 GameObject:
   m_ObjectHideFlags: 0
