@@ -67,23 +67,41 @@ public class LoseScreen : MonoBehaviour
 
     private void checkOxygen()
     {
-        if(oxygen.value == 0) currentState = transitionState.PauseForDogs;
+        if (oxygen.value == 0) 
+        { 
+            currentState = transitionState.PauseForDogs;
+            Instructions.text = "Game Over:\nPlayer ran out of oxygen.";
+        }
     }
 
     //actions to perform while in the PauseForDogs state
     private void doWaitForDogs()
     {
         currentWaitTime += Time.deltaTime;
+        if(oxygen.value > 0)
+        {
+            currentState = transitionState.Waiting;
+            currentWaitTime = 0;
+            return;
+        }
         if(currentWaitTime >= waitUntil)
         {
             currentState = transitionState.FadeOut;
             currentFadeFrame = 0;
+            currentWaitTime = 0;
         }
     }
     
     //actions to perform while in the fadeout state
     private void doFadeOut()
     {
+        if(oxygen.value > 0)
+        {
+            currentState = transitionState.Waiting;
+            textFadeColor.a = fadeColor.a = 0f;
+            DarkOverlay.GetComponent<SpriteRenderer>().color = fadeColor;
+            Instructions.color = textFadeColor;
+        }
         if(currentFadeFrame < fadeFrames)
         {
             currentFadeFrame++;

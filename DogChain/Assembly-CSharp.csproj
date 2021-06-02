@@ -86,6 +86,7 @@
     <Compile Include="Assets\Alpha files\Scripts\PlayerMovement\AlphaFrictionZone.cs" />
     <Compile Include="Assets\Alpha files\Scripts\GenerateWalls\GenerateWalls.cs" />
     <Compile Include="Assets\Alpha files\Scripts\UnlockMap\UnlockDoors.cs" />
+    <Compile Include="Assets\Alpha files\Scripts\HealthBar\LoseScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
