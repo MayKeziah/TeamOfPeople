@@ -26,7 +26,7 @@ public class UnlockDoors : MonoBehaviour
 
     private bool doorQualifies()
     {
-      return Input.GetKeyDown(KeyCode.Space) || (i < dogsToUnlockDoor.Count) && (dogsToUnlockDoor[i] <= dogs.GetDogsInPossession());
+      return (i < dogsToUnlockDoor.Count) && (dogsToUnlockDoor[i] <= dogs.GetDogsInPossession());
     }
 
     private void unlock()
